@@ -50,15 +50,17 @@ elBtnDownloadCSV.addEventListener("click",()=>{
   showToast("✔️ CSV file downloaded","success");
 });
 
-elBtnCopyTop5.addEventListener("click",()=>{
-  const ranking = Object.entries(STATE.scores).sort((a,b)=> b[1]-a[1]);
-  const top5 = ranking.slice(0,5).map(([s])=>s).join(", ");
-  navigator.clipboard.writeText(top5).then(()=>{
-    showToast("✔️ Top 5 strengths copied","success");
-  }).catch(()=>{
-    showToast("⚠️ Copy failed","danger");
+if (typeof elBtnCopyTop5 !== 'undefined' && elBtnCopyTop5) {
+  elBtnCopyTop5.addEventListener("click",()=>{
+    const ranking = Object.entries(STATE.scores).sort((a,b)=> b[1]-a[1]);
+    const top5 = ranking.slice(0,5).map(([s])=>s).join(", ");
+    navigator.clipboard.writeText(top5).then(()=>{
+      showToast("✔️ Top 5 strengths copied","success");
+    }).catch(()=>{
+      showToast("⚠️ Copy failed","danger");
+    });
   });
-});
+}
 
 elBtnRestart.addEventListener("click",()=>{
   clearState();
