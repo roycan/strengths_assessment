@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VIA Assessment – Question Template</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <style>
+    body { background:#f9fafb; }
+    .question-card { margin-top:1rem; border-radius:12px; }
+    .statements { margin-bottom:1rem; }
+    .statement { font-size:1rem; line-height:1.4; margin-bottom:0.75rem; }
+    .scale-options {
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:0.5rem;
+    }
+    .scale-options label {
+      flex: 1 1 45%;
+      text-align:center;
+      font-size:0.9rem;
+      padding:0.75rem;
+      border-radius:8px;
+      border:1px solid #ddd;
+      background:#fff;
+    }
+    .scale-options label.equal {
+      flex:1 1 100%;
+    }
+    .scale-options input[type="radio"] {
+      margin-right:0.35rem;
+    }
+    @media(min-width:600px){
+      /* On larger screens, keep them in one row */
+      .scale-options { flex-wrap:nowrap; }
+      .scale-options label { flex:1 1 auto; }
+      .scale-options label.equal { flex:1 1 auto; }
+    }
+  </style>
+</head>
+<body>
+  <section class="section">
+    <div class="container">
+      <div class="card question-card">
+        <div class="card-content">
+          <div class="progress-info is-flex is-justify-content-space-between mb-3">
+            <span class="tag is-info is-light">12 / 96</span>
+            <span class="tag is-warning is-light">20s</span>
+          </div>
+
+          <h2 class="title is-5">Question 12</h2>
+
+          <div class="statements">
+            <div class="statement"><strong>A:</strong> I get excited when I can dive into a new subject and figure it out on my own.</div>
+            <div class="statement"><strong>B:</strong> I feel most alive when I’m bringing energy and enthusiasm to a group activity.</div>
+          </div>
+
+          <!-- Stacked, mobile-friendly radio scale -->
+          <div class="scale-options">
+            <label>
+              <input type="radio" name="q12" value="strongA"> Strongly A
+            </label>
+            <label>
+              <input type="radio" name="q12" value="slightA"> Slightly A
+            </label>
+            <label class="equal">
+              <input type="radio" name="q12" value="equal"> Equal
+            </label>
+            <label>
+              <input type="radio" name="q12" value="slightB"> Slightly B
+            </label>
+            <label>
+              <input type="radio" name="q12" value="strongB"> Strongly B
+            </label>
+          </div>
+
+          <p class="help is-size-7 has-text-grey mt-2">
+            Pick the side that feels more you right now. Use Equal only if both truly fit.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

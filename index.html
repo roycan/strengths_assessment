@@ -1,31 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Scholar’s Compass VIA Assessment</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <style>
-    body { background:#f9fafb; }
-    .app-container { max-width: 720px; margin: 0 auto; padding: 1rem; }
-    .card { border-radius: 12px; }
-    .progress-info { display:flex; justify-content:space-between; margin-bottom:0.5rem; align-items:center; }
-    .statements { display:flex; justify-content:space-between; margin-bottom:1rem; gap:1rem; }
-    .statement { width:50%; font-size:1rem; line-height:1.4; }
-    .scale-options { display:flex; justify-content:space-between; margin:1rem 0; gap:0.5rem; }
-    .scale-options label { flex:1; text-align:center; font-size:0.9rem; padding:0.5rem; border-radius:10px; background:#fff; border:1px solid #eaeaea; }
-    .scale-options input[type="radio"] { margin-right:0.35rem; }
-    .option-a { color:#3273dc; }
-    .option-b { color:#23d160; }
-    .option-neutral { color:#7a7a7a; }
-    .help { margin-top:0.25rem; }
-    .rank-top { background:#eefaf5; }
-    .hidden { display:none !important; }
-    .hero.is-primary { background: linear-gradient(135deg, #485fc7 0%, #4a90e2 100%); }
-    .strength-tag { font-size:0.8rem; margin-top:0.25rem; display:inline-block; }
-    .timer-low { background:#f14668 !important; color:#fff !important; }
+    body {
+      background: #f9fafb;
+    }
+
+    .app-container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    .card {
+      border-radius: 12px;
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      align-items: center;
+    }
+
+    .statements {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      gap: 1rem;
+    }
+
+    .statement {
+      width: 50%;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+
+    .scale-options {
+      display: flex;
+      justify-content: space-between;
+      margin: 1rem 0;
+      gap: 0.5rem;
+    }
+
+    .scale-options label {
+      flex: 1;
+      text-align: center;
+      font-size: 0.9rem;
+      padding: 0.5rem;
+      border-radius: 10px;
+      background: #fff;
+      border: 1px solid #eaeaea;
+    }
+
+    .scale-options input[type="radio"] {
+      margin-right: 0.35rem;
+    }
+
+    .option-a {
+      color: #3273dc;
+    }
+
+    .option-b {
+      color: #23d160;
+    }
+
+    .option-neutral {
+      color: #7a7a7a;
+    }
+
+    .help {
+      margin-top: 0.25rem;
+    }
+
+    .rank-top {
+      background: #eefaf5;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .hero.is-primary {
+      background: linear-gradient(135deg, #485fc7 0%, #4a90e2 100%);
+    }
+
+    /* .strength-tag { font-size:0.8rem; margin-top:0.25rem; display:inline-block; } */
+    .strength-tag {
+      display: none !important;
+    }
+
+    .timer-low {
+      background: #f14668 !important;
+      color: #fff !important;
+    }
   </style>
 </head>
+
 <body>
   <section class="hero is-primary">
     <div class="hero-body">
@@ -41,7 +117,9 @@
     <section id="screen-consent" class="card">
       <div class="card-content">
         <h2 class="title is-4">Consent and privacy</h2>
-        <p>This activity has 96 paired choices. You’ll have 20 seconds per pair. Your responses are saved only on your device (localStorage). No personal data is collected or sent to a server. You can export your results as JSON or CSV.</p>
+        <p>This activity has 96 paired choices. You’ll have 20 seconds per pair. Your responses are saved only on your
+          device (localStorage). No personal data is collected or sent to a server. You can export your results as JSON
+          or CSV.</p>
         <div class="field mt-3">
           <label class="checkbox">
             <input id="consent-check" type="checkbox"> I agree to participate voluntarily.
@@ -52,7 +130,8 @@
           <button id="btn-resume" class="button is-link is-light hidden">Resume saved session</button>
           <button id="btn-clear" class="button is-danger is-light">Clear saved data</button>
         </div>
-        <p class="is-size-7 has-text-grey">Tip: You can leave and return later; your progress auto-saves. Use “Resume” to continue where you left off.</p>
+        <p class="is-size-7 has-text-grey">Tip: You can leave and return later; your progress auto-saves. Use “Resume”
+          to continue where you left off.</p>
       </div>
     </section>
 
@@ -92,7 +171,8 @@
             <input type="radio" name="scale" value="strongB"> Strongly B
           </label>
         </div>
-        <p class="help is-size-7 has-text-grey">Pick the side that feels more you right now. Use Equal only if both truly fit.</p>
+        <p class="help is-size-7 has-text-grey">Pick the side that feels more you right now. Use Equal only if both
+          truly fit.</p>
         <progress id="progress-bar" class="progress is-small is-info" value="0" max="96">0%</progress>
       </div>
     </section>
@@ -103,7 +183,14 @@
         <h2 class="title is-4">Your results</h2>
         <p>Raw scores (0–16) and percentage of the maximum for each strength. Top five highlighted.</p>
         <table class="table is-fullwidth is-striped is-hoverable">
-          <thead><tr><th>Rank</th><th>Strength</th><th>Score</th><th>% of Max</th></tr></thead>
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Strength</th>
+              <th>Score</th>
+              <th>% of Max</th>
+            </tr>
+          </thead>
           <tbody id="results-table-body"></tbody>
         </table>
         <p id="meta-note" class="is-size-7 has-text-grey"></p>
@@ -119,11 +206,11 @@
   <script>
     // Strengths list
     const STRENGTHS = [
-      "Creativity","Curiosity","Judgment","Love of Learning","Perspective",
-      "Bravery","Perseverance","Honesty","Zest","Love",
-      "Kindness","Social Intelligence","Teamwork","Leadership","Fairness",
-      "Forgiveness","Humility","Prudence","Self-Regulation","Humor",
-      "Appreciation of Beauty","Gratitude","Hope","Spirituality"
+      "Creativity", "Curiosity", "Judgment", "Love of Learning", "Perspective",
+      "Bravery", "Perseverance", "Honesty", "Zest", "Love",
+      "Kindness", "Social Intelligence", "Teamwork", "Leadership", "Fairness",
+      "Forgiveness", "Humility", "Prudence", "Self-Regulation", "Humor",
+      "Appreciation of Beauty", "Gratitude", "Hope", "Spirituality"
     ];
 
     // Updated 96 pairs (A/B text + strength)
@@ -228,11 +315,11 @@
 
     // Model B allocations (2 points per item)
     const WEIGHTS = {
-      strongA: {A:2, B:0},
-      slightA: {A:1.5, B:0.5},
-      equal:   {A:1, B:1},
-      slightB: {A:0.5, B:1.5},
-      strongB: {A:0, B:2}
+      strongA: { A: 2, B: 0 },
+      slightA: { A: 1.5, B: 0.5 },
+      equal: { A: 1, B: 1 },
+      slightB: { A: 0.5, B: 1.5 },
+      strongB: { A: 0, B: 2 }
     };
 
     const APP_KEY = "scholars_compass_via_v3";
@@ -265,7 +352,7 @@
     const elBtnRestart = document.getElementById("btn-restart");
 
     function initialState() {
-      const scores = {}; STRENGTHS.forEach(s => scores[s]=0);
+      const scores = {}; STRENGTHS.forEach(s => scores[s] = 0);
       return {
         version: "v3",
         index: 0,
@@ -276,16 +363,16 @@
         completedAt: null
       };
     }
-    function saveState(){ localStorage.setItem(APP_KEY, JSON.stringify(STATE)); }
-    function loadState(){ const raw=localStorage.getItem(APP_KEY); return raw?JSON.parse(raw):null; }
-    function clearState(){ localStorage.removeItem(APP_KEY); }
+    function saveState() { localStorage.setItem(APP_KEY, JSON.stringify(STATE)); }
+    function loadState() { const raw = localStorage.getItem(APP_KEY); return raw ? JSON.parse(raw) : null; }
+    function clearState() { localStorage.removeItem(APP_KEY); }
 
-    function showAssessment(){ elConsent.classList.add("hidden"); elResults.classList.add("hidden"); elAssessment.classList.remove("hidden"); }
-    function showResults(){ elConsent.classList.add("hidden"); elAssessment.classList.add("hidden"); elResults.classList.remove("hidden"); }
+    function showAssessment() { elConsent.classList.add("hidden"); elResults.classList.add("hidden"); elAssessment.classList.remove("hidden"); }
+    function showResults() { elConsent.classList.add("hidden"); elAssessment.classList.add("hidden"); elResults.classList.remove("hidden"); }
 
-    function syncConsentButtons(){
+    function syncConsentButtons() {
       const saved = loadState();
-      if(saved && !saved.completedAt && saved.index < QUESTIONS.length){
+      if (saved && !saved.completedAt && saved.index < QUESTIONS.length) {
         elBtnResume.classList.remove("hidden");
       } else {
         elBtnResume.classList.add("hidden");
@@ -293,32 +380,32 @@
     }
     syncConsentButtons();
 
-    elConsentCheck.addEventListener("change",()=>{ elBtnStart.disabled=!elConsentCheck.checked; });
-    elBtnStart.addEventListener("click",()=>{
+    elConsentCheck.addEventListener("change", () => { elBtnStart.disabled = !elConsentCheck.checked; });
+    elBtnStart.addEventListener("click", () => {
       STATE = initialState();
       saveState();
       showAssessment();
       renderQuestion();
       startTimer();
     });
-    elBtnResume.addEventListener("click",()=>{
+    elBtnResume.addEventListener("click", () => {
       STATE = loadState();
-      if(!STATE){ return; }
+      if (!STATE) { return; }
       showAssessment();
       renderQuestion();
       startTimer();
     });
-    elBtnClear.addEventListener("click",()=>{
+    elBtnClear.addEventListener("click", () => {
       clearState();
       syncConsentButtons();
       alert("Saved data cleared.");
     });
 
-    function renderQuestion(){
+    function renderQuestion() {
       const idx = STATE.index;
-      if(idx >= QUESTIONS.length){ finalizeAndShowResults(); return; }
+      if (idx >= QUESTIONS.length) { finalizeAndShowResults(); return; }
       const q = QUESTIONS[idx];
-      elQuestionTitle.textContent = `Question ${idx+1}`;
+      elQuestionTitle.textContent = `Question ${idx + 1}`;
       elChoiceAText.textContent = q.aText;
       elChoiceBText.textContent = q.bText;
       elChoiceAStrength.textContent = q.aStrength;
@@ -326,14 +413,14 @@
       elChoiceAStrength.className = "tag is-info is-light strength-tag";
       elChoiceBStrength.className = "tag is-success is-light strength-tag";
 
-      elProgressCount.textContent = `${idx+1} / ${QUESTIONS.length}`;
-      elProgressBar.value = idx+1; elProgressBar.max = QUESTIONS.length;
-      elProgressBar.textContent = Math.round(((idx+1)/QUESTIONS.length)*100) + "%";
+      elProgressCount.textContent = `${idx + 1} / ${QUESTIONS.length}`;
+      elProgressBar.value = idx + 1; elProgressBar.max = QUESTIONS.length;
+      elProgressBar.textContent = Math.round(((idx + 1) / QUESTIONS.length) * 100) + "%";
 
       // Reset radios
-      document.querySelectorAll('input[name="scale"]').forEach(r=>{ r.checked=false; r.disabled=false; });
+      document.querySelectorAll('input[name="scale"]').forEach(r => { r.checked = false; r.disabled = false; });
       // Attach one-time handler
-      document.querySelectorAll('input[name="scale"]').forEach(r=>{
+      document.querySelectorAll('input[name="scale"]').forEach(r => {
         r.onchange = () => {
           recordSelection(r.value);
           advance();
@@ -341,40 +428,40 @@
       });
     }
 
-    function startTimer(){
+    function startTimer() {
       stopTimer();
       timerRemaining = 20;
       timerStartMs = Date.now();
       updateTimerUI();
-      timerHandle = setInterval(()=>{
+      timerHandle = setInterval(() => {
         timerRemaining--;
         updateTimerUI();
-        if(timerRemaining <= 0){
+        if (timerRemaining <= 0) {
           stopTimer();
           recordTimeout();
           advance();
         }
-      },1000);
+      }, 1000);
     }
-    function stopTimer(){ if(timerHandle){ clearInterval(timerHandle); timerHandle=null; } }
-    function updateTimerUI(){
+    function stopTimer() { if (timerHandle) { clearInterval(timerHandle); timerHandle = null; } }
+    function updateTimerUI() {
       elTimer.textContent = `${timerRemaining}s`;
-      if(timerRemaining <= 5){
+      if (timerRemaining <= 5) {
         elTimer.classList.add("timer-low");
       } else {
         elTimer.classList.remove("timer-low");
       }
     }
 
-    function recordSelection(val){
+    function recordSelection(val) {
       const idx = STATE.index;
       const q = QUESTIONS[idx];
       const w = WEIGHTS[val];
       const timeTakenMs = Date.now() - timerStartMs;
 
       // Allocate points
-      STATE.scores[q.aStrength] = (STATE.scores[q.aStrength]||0) + w.A;
-      STATE.scores[q.bStrength] = (STATE.scores[q.bStrength]||0) + w.B;
+      STATE.scores[q.aStrength] = (STATE.scores[q.aStrength] || 0) + w.A;
+      STATE.scores[q.bStrength] = (STATE.scores[q.bStrength] || 0) + w.B;
 
       STATE.responses.push({
         id: q.id,
@@ -390,7 +477,7 @@
       saveState();
     }
 
-    function recordTimeout(){
+    function recordTimeout() {
       const idx = STATE.index;
       const q = QUESTIONS[idx];
       STATE.timeouts++;
@@ -408,10 +495,10 @@
       saveState();
     }
 
-    function advance(){
+    function advance() {
       STATE.index++;
       saveState();
-      if(STATE.index >= QUESTIONS.length){
+      if (STATE.index >= QUESTIONS.length) {
         finalizeAndShowResults();
       } else {
         renderQuestion();
@@ -419,37 +506,37 @@
       }
     }
 
-    function finalizeAndShowResults(){
+    function finalizeAndShowResults() {
       STATE.completedAt = new Date().toISOString();
       saveState();
-      const ranking = Object.entries(STATE.scores).sort((a,b)=> b[1]-a[1]);
+      const ranking = Object.entries(STATE.scores).sort((a, b) => b[1] - a[1]);
       renderResults(ranking);
       showResults();
     }
 
-    function renderResults(ranking){
+    function renderResults(ranking) {
       elResultsTableBody.innerHTML = "";
       const MAX_PER_STRENGTH = 16; // 8 items × 2 points
-      ranking.forEach(([strength, score], i)=>{
+      ranking.forEach(([strength, score], i) => {
         const pct = Math.round((score / MAX_PER_STRENGTH) * 100);
         const tr = document.createElement("tr");
-        if(i < 5) tr.classList.add("rank-top");
+        if (i < 5) tr.classList.add("rank-top");
         tr.innerHTML = `
-          <td>${i+1}</td>
+          <td>${i + 1}</td>
           <td>${strength}</td>
           <td>${score.toFixed(2)}</td>
           <td>${pct}%</td>
         `;
         elResultsTableBody.appendChild(tr);
       });
-      const neutrals = STATE.responses.filter(r=>r.selection==="equal").length;
+      const neutrals = STATE.responses.filter(r => r.selection === "equal").length;
       document.getElementById("meta-note").textContent =
         `Neutrals: ${neutrals} • Timeouts: ${STATE.timeouts} • Total items: ${QUESTIONS.length}`;
     }
 
     // Export helpers
-    function download(filename, content, mime='text/plain'){
-      const blob = new Blob([content], {type:mime});
+    function download(filename, content, mime = 'text/plain') {
+      const blob = new Blob([content], { type: mime });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url; a.download = filename;
@@ -457,7 +544,7 @@
       URL.revokeObjectURL(url);
     }
 
-    elBtnDownloadJSON.addEventListener("click",()=>{
+    elBtnDownloadJSON.addEventListener("click", () => {
       const data = {
         metadata: {
           version: STATE.version,
@@ -469,17 +556,17 @@
           scoringModel: "Model B (2 points per item; Slight=1.5/0.5; Equal=1/1)"
         },
         scores: STATE.scores,
-        ranking: Object.entries(STATE.scores).sort((a,b)=> b[1]-a[1]),
+        ranking: Object.entries(STATE.scores).sort((a, b) => b[1] - a[1]),
         responses: STATE.responses
       };
-      download("scholars_compass_results.json", JSON.stringify(data,null,2), "application/json");
+      download("scholars_compass_results.json", JSON.stringify(data, null, 2), "application/json");
     });
 
-    elBtnDownloadCSV.addEventListener("click",()=>{
-      const header = ["id","selection","aStrength","bStrength","aPoints","bPoints","timeTakenMs","timeout","at"].join(",");
-      const rows = STATE.responses.map(r=>[
+    elBtnDownloadCSV.addEventListener("click", () => {
+      const header = ["id", "selection", "aStrength", "bStrength", "aPoints", "bPoints", "timeTakenMs", "timeout", "at"].join(",");
+      const rows = STATE.responses.map(r => [
         r.id,
-        r.selection===null?"":r.selection,
+        r.selection === null ? "" : r.selection,
         `"${r.aStrength}"`,
         `"${r.bStrength}"`,
         r.aPoints.toFixed(2),
@@ -492,7 +579,7 @@
       download("scholars_compass_responses.csv", csv, "text/csv");
     });
 
-    elBtnRestart.addEventListener("click",()=>{
+    elBtnRestart.addEventListener("click", () => {
       clearState();
       STATE = initialState();
       saveState();
@@ -502,11 +589,11 @@
     });
 
     // Init: show results if a completed session exists; else consent; else resume option
-    (function init(){
+    (function init() {
       const saved = loadState();
-      if(saved && saved.completedAt){
+      if (saved && saved.completedAt) {
         STATE = saved;
-        const ranking = Object.entries(STATE.scores).sort((a,b)=> b[1]-a[1]);
+        const ranking = Object.entries(STATE.scores).sort((a, b) => b[1] - a[1]);
         renderResults(ranking);
         showResults();
       } else {
@@ -518,4 +605,5 @@
     })();
   </script>
 </body>
+
 </html>
