@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Strength Profile</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <section class="hero is-primary">
+    <div class="hero-body">
+      <div class="app-container">
+        <h1 id="page-title" class="title has-text-white">Strength Profile</h1>
+        <p id="page-tagline" class="subtitle has-text-white"></p>
+      </div>
+    </div>
+  </section>
+
+  <main class="app-container content">
+    <section class="card">
+      <div class="card-content" id="strength-container">
+        <p id="not-found" class="has-text-danger hidden">Strength not found. See <a href="/results/journey/">your journey hub</a>.</p>
+
+        <h2 class="title is-4">What is <span id="display-name"></span>?</h2>
+        <p id="definition"></p>
+
+        <h2 class="title is-4 mt-5">Signs You Might Have <span id="display-name-2"></span> as a Signature Strength</h2>
+        <ul id="signs"></ul>
+
+        <h2 class="title is-4 mt-5">Action Plan: Use <span id="display-name-3"></span> This Week</h2>
+        <ul>
+          <li><strong>At Work:</strong> <span id="ap-work"></span></li>
+          <li><strong>In Relationships:</strong> <span id="ap-relationships"></span></li>
+          <li><strong>Personal Growth:</strong> <span id="ap-personal"></span></li>
+        </ul>
+
+        <h2 class="title is-4 mt-5">The Golden Mean: Watch Outs</h2>
+        <ul>
+          <li><strong>Underuse:</strong> <span id="gm-under"></span></li>
+          <li><strong>Overuse:</strong> <span id="gm-over"></span></li>
+        </ul>
+
+        <blockquote id="quote" class="mt-5"></blockquote>
+      </div>
+    </section>
+  </main>
+
+  <script src="/content/strengths-content.js"></script>
+  <script src="/js/strength.js"></script>
+</body>
+</html>
