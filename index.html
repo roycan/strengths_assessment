@@ -1,107 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Scholar’s Compass VIA Assessment</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  <style>
-    body {
-      background: #f9fafb;
-    }
-
-    .app-container {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 1rem;
-    }
-
-    .card {
-      border-radius: 12px;
-    }
-
-    .progress-info {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.5rem;
-      align-items: center;
-    }
-
-    .statements {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 1rem;
-      gap: 1rem;
-    }
-
-    .statement {
-      width: 50%;
-      font-size: 1rem;
-      line-height: 1.4;
-    }
-
-    .scale-options {
-      display: flex;
-      justify-content: space-between;
-      margin: 1rem 0;
-      gap: 0.5rem;
-    }
-
-    .scale-options label {
-      flex: 1;
-      text-align: center;
-      font-size: 0.9rem;
-      padding: 0.5rem;
-      border-radius: 10px;
-      background: #fff;
-      border: 1px solid #eaeaea;
-    }
-
-    .scale-options input[type="radio"] {
-      margin-right: 0.35rem;
-    }
-
-    .option-a {
-      color: #3273dc;
-    }
-
-    .option-b {
-      color: #23d160;
-    }
-
-    .option-neutral {
-      color: #7a7a7a;
-    }
-
-    .help {
-      margin-top: 0.25rem;
-    }
-
-    .rank-top {
-      background: #eefaf5;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    .hero.is-primary {
-      background: linear-gradient(135deg, #485fc7 0%, #4a90e2 100%);
-    }
-
-    /* .strength-tag { font-size:0.8rem; margin-top:0.25rem; display:inline-block; } */
-    .strength-tag {
-      display: none !important;
-    }
-
-    .timer-low {
-      background: #f14668 !important;
-      color: #fff !important;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
   <section class="hero is-primary">
     <div class="hero-body">
@@ -117,9 +22,7 @@
     <section id="screen-consent" class="card">
       <div class="card-content">
         <h2 class="title is-4">Consent and privacy</h2>
-        <p>This activity has 96 paired choices. You’ll have 20 seconds per pair. Your responses are saved only on your
-          device (localStorage). No personal data is collected or sent to a server. You can export your results as JSON
-          or CSV.</p>
+        <p>This activity has 96 paired choices. You’ll have 20 seconds per pair. Your responses are saved only on your device (localStorage). No personal data is collected or sent to a server. You can export your results as JSON or CSV.</p>
         <div class="field mt-3">
           <label class="checkbox">
             <input id="consent-check" type="checkbox"> I agree to participate voluntarily.
@@ -130,8 +33,6 @@
           <button id="btn-resume" class="button is-link is-light hidden">Resume saved session</button>
           <button id="btn-clear" class="button is-danger is-light">Clear saved data</button>
         </div>
-        <p class="is-size-7 has-text-grey">Tip: You can leave and return later; your progress auto-saves. Use “Resume”
-          to continue where you left off.</p>
       </div>
     </section>
 
@@ -144,35 +45,27 @@
         </div>
         <h2 id="question-title" class="title is-5">Question</h2>
         <div class="statements">
-          <div class="statement has-text-left">
-            <strong>A:</strong> <span id="choice-a-text"></span>
-            <div id="choice-a-strength" class="tag is-light strength-tag"></div>
-          </div>
-          <div class="statement has-text-right">
-            <strong>B:</strong> <span id="choice-b-text"></span>
-            <div id="choice-b-strength" class="tag is-light strength-tag"></div>
-          </div>
+          <div class="statement"><strong>A:</strong> <span id="choice-a-text"></span></div>
+          <div class="statement"><strong>B:</strong> <span id="choice-b-text"></span></div>
         </div>
-        <!-- 5-point radio scale -->
         <div class="scale-options" role="radiogroup" aria-label="Select how much A or B resonates">
-          <label class="option-a">
+          <label>
             <input type="radio" name="scale" value="strongA"> Strongly A
           </label>
-          <label class="option-a">
+          <label>
             <input type="radio" name="scale" value="slightA"> Slightly A
           </label>
-          <label class="option-neutral">
+          <label class="equal">
             <input type="radio" name="scale" value="equal"> Equal
           </label>
-          <label class="option-b">
+          <label>
             <input type="radio" name="scale" value="slightB"> Slightly B
           </label>
-          <label class="option-b">
+          <label>
             <input type="radio" name="scale" value="strongB"> Strongly B
           </label>
         </div>
-        <p class="help is-size-7 has-text-grey">Pick the side that feels more you right now. Use Equal only if both
-          truly fit.</p>
+        <p class="help is-size-7 has-text-grey">Pick the side that feels more you right now. Use Equal only if both truly fit.</p>
         <progress id="progress-bar" class="progress is-small is-info" value="0" max="96">0%</progress>
       </div>
     </section>
@@ -182,428 +75,44 @@
       <div class="card-content">
         <h2 class="title is-4">Your results</h2>
         <p>Raw scores (0–16) and percentage of the maximum for each strength. Top five highlighted.</p>
-        <table class="table is-fullwidth is-striped is-hoverable">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Strength</th>
-              <th>Score</th>
-              <th>% of Max</th>
-            </tr>
-          </thead>
-          <tbody id="results-table-body"></tbody>
-        </table>
-        <p id="meta-note" class="is-size-7 has-text-grey"></p>
-        <div class="buttons">
+
+        <!-- Desktop table -->
+        <div class="table-container is-hidden-mobile">
+          <table class="table is-fullwidth is-striped is-hoverable">
+            <thead>
+              <tr><th>Rank</th><th>Strength</th><th>Score</th><th>% of Max</th></tr>
+            </thead>
+            <tbody id="results-table-body"></tbody>
+          </table>
+        </div>
+
+        <!-- Mobile cards -->
+        <div id="results-cards" class="is-hidden-tablet"></div>
+
+        <p id="meta-note" class="is-size-7 has-text-grey mt-2"></p>
+        <div class="buttons mt-3">
           <button id="btn-download-json" class="button is-link">Download JSON</button>
           <button id="btn-download-csv" class="button is-info">Download CSV</button>
+          <button id="btn-copy-top5" class="button is-success">Copy Top 5</button>
           <button id="btn-restart" class="button is-primary is-light">Restart</button>
         </div>
       </div>
     </section>
   </main>
 
-  <script>
-    // Strengths list
-    const STRENGTHS = [
-      "Creativity", "Curiosity", "Judgment", "Love of Learning", "Perspective",
-      "Bravery", "Perseverance", "Honesty", "Zest", "Love",
-      "Kindness", "Social Intelligence", "Teamwork", "Leadership", "Fairness",
-      "Forgiveness", "Humility", "Prudence", "Self-Regulation", "Humor",
-      "Appreciation of Beauty", "Gratitude", "Hope", "Spirituality"
-    ];
+  <!-- Toast -->
+  <div id="toast"></div>
 
-    // Updated 96 pairs (A/B text + strength)
-    const QUESTIONS = [
-      {id:1,aText:"I get excited when I can dive into a new subject and figure it out on my own.",aStrength:"Love of Learning",bText:"I feel most alive when I’m bringing energy and enthusiasm to a group activity.",bStrength:"Zest"},
-      {id:2,aText:"I usually pause to think through the risks before acting.",aStrength:"Prudence",bText:"I believe my life is guided by a deeper purpose.",bStrength:"Spirituality"},
-      {id:3,aText:"I make sure everyone gets treated fairly, no matter who they are.",aStrength:"Fairness",bText:"I like stepping up to organize and guide the group.",bStrength:"Leadership"},
-      {id:4,aText:"I can usually sense how others are feeling and respond well.",aStrength:"Social Intelligence",bText:"I stick with tasks until they’re finished, even if they’re boring.",bStrength:"Perseverance"},
-      {id:5,aText:"I tend to focus on what could go right in the future.",aStrength:"Hope",bText:"I speak up for what I believe, even if it’s unpopular.",bStrength:"Bravery"},
-      {id:6,aText:"I often do small favors to make life easier for others.",aStrength:"Kindness",bText:"I enjoy coming up with unusual or clever ideas.",bStrength:"Creativity"},
-      {id:7,aText:"I like making people laugh and lightening the mood.",aStrength:"Humor",bText:"I’m good at spotting possible problems before they happen.",bStrength:"Prudence"},
-      {id:8,aText:"I’m a steady source of care and support for people I love.",aStrength:"Love",bText:"I enjoy analyzing details and weighing evidence carefully.",bStrength:"Judgment"},
-      {id:9,aText:"I’m comfortable making quick decisions, even with limited info.",aStrength:"Bravery",bText:"I go out of my way to avoid hurting people’s feelings.",bStrength:"Kindness"},
-      {id:10,aText:"I like finding original ways to solve problems.",aStrength:"Creativity",bText:"I believe in giving people second chances.",bStrength:"Forgiveness"},
-      {id:11,aText:"I’d rather collect and organize facts than jump into wild ideas.",aStrength:"Judgment",bText:"I feel energized when I help others reach their potential.",bStrength:"Love"},
-      {id:12,aText:"I rarely give up on a goal, even when it’s tough.",aStrength:"Perseverance",bText:"I’m comfortable sharing my true thoughts and feelings.",bStrength:"Honesty"},
-      {id:13,aText:"I often pause to admire beauty in nature, art, or people’s work.",aStrength:"Appreciation of Beauty",bText:"I feel called to serve and lead my community.",bStrength:"Leadership"},
-      {id:14,aText:"I like keeping my life organized and structured.",aStrength:"Self-Regulation",bText:"I believe my life has a deeper meaning.",bStrength:"Spirituality"},
-      {id:15,aText:"I feel good when I make decisions that are morally fair.",aStrength:"Fairness",bText:"I enjoy exploring ideas just for the sake of curiosity.",bStrength:"Curiosity"},
-      {id:16,aText:"I try to stay positive and optimistic.",aStrength:"Hope",bText:"I think it’s important to admit my mistakes.",bStrength:"Humility"},
-      {id:17,aText:"I enjoy teaching others challenging material.",aStrength:"Love of Learning",bText:"I can usually predict what others are about to say or do.",bStrength:"Social Intelligence"},
-      {id:18,aText:"I prefer not to draw too much attention to my achievements.",aStrength:"Humility",bText:"I appreciate it when people show gratitude for my help.",bStrength:"Gratitude"},
-      {id:19,aText:"I try to live by my deepest values, no matter what.",aStrength:"Honesty",bText:"I often use humor to ease tension.",bStrength:"Humor"},
-      {id:20,aText:"I make sure everyone in a group feels included.",aStrength:"Teamwork",bText:"I can stay focused even when there are distractions.",bStrength:"Self-Regulation"},
-      {id:21,aText:"I’m sensitive to people’s struggles and want to help.",aStrength:"Kindness",bText:"I like looking at situations from multiple viewpoints.",bStrength:"Perspective"},
-      {id:22,aText:"I feel most alive when I’m physically active.",aStrength:"Zest",bText:"I often put the team’s needs before my own.",bStrength:"Teamwork"},
-      {id:23,aText:"I like analyzing situations from different angles.",aStrength:"Perspective",bText:"I can usually forgive people who have wronged me.",bStrength:"Forgiveness"},
-      {id:24,aText:"I notice and admire excellence in others.",aStrength:"Appreciation of Beauty",bText:"I often pause to reflect on what I’ve been given.",bStrength:"Gratitude"},
-      {id:25,aText:"I enjoy experimenting with new ways to solve everyday problems.",aStrength:"Creativity",bText:"I stick to my commitments, even when they get tough.",bStrength:"Perseverance"},
-      {id:26,aText:"I like asking questions just to learn more.",aStrength:"Curiosity",bText:"I feel proud when I help keep things fair for everyone.",bStrength:"Fairness"},
-      {id:27,aText:"I’m energized when I can motivate others to act.",aStrength:"Leadership",bText:"I’m happiest when I can show love and care to close friends.",bStrength:"Love"},
-      {id:28,aText:"I often notice beauty in small details others miss.",aStrength:"Appreciation of Beauty",bText:"I try to stay disciplined and avoid distractions.",bStrength:"Self-Regulation"},
-      {id:29,aText:"I like to encourage others with hopeful words.",aStrength:"Hope",bText:"I’m quick to admit when I don’t know something.",bStrength:"Humility"},
-      {id:30,aText:"I enjoy making people laugh in stressful situations.",aStrength:"Humor",bText:"I carefully weigh pros and cons before deciding.",bStrength:"Judgment"},
-      {id:31,aText:"I believe in forgiving mistakes so people can move forward.",aStrength:"Forgiveness",bText:"I feel guided by values that give my life meaning.",bStrength:"Spirituality"},
-      {id:32,aText:"I like being the one who helps the group stay on track.",aStrength:"Teamwork",bText:"I’m willing to take risks to stand up for what’s right.",bStrength:"Bravery"},
-      {id:33,aText:"I enjoy learning new skills just for the fun of it.",aStrength:"Love of Learning",bText:"I naturally sense when someone feels left out.",bStrength:"Social Intelligence"},
-      {id:34,aText:"I’m careful about planning ahead to avoid mistakes.",aStrength:"Prudence",bText:"I feel grateful for the small things in life.",bStrength:"Gratitude"},
-      {id:35,aText:"I admire people who create beautiful things, and I notice it often.",aStrength:"Appreciation of Beauty",bText:"I try to keep my emotions under control, even when stressed.",bStrength:"Self-Regulation"},
-      {id:36,aText:"I like to brainstorm unusual ideas with others.",aStrength:"Creativity",bText:"I feel proud when I stick with something until the end.",bStrength:"Perseverance"},
-      {id:37,aText:"I enjoy asking “why” questions to dig deeper.",aStrength:"Curiosity",bText:"I feel good when I make sure everyone has an equal chance.",bStrength:"Fairness"},
-      {id:38,aText:"I’m comfortable leading when a group needs direction.",aStrength:"Leadership",bText:"I’m happiest when I can show loyalty and care to my friends.",bStrength:"Love"},
-      {id:39,aText:"I like to see the bigger picture in situations.",aStrength:"Perspective",bText:"I try to forgive quickly so I can move on.",bStrength:"Forgiveness"},
-      {id:40,aText:"I feel energized when I’m physically active or moving.",aStrength:"Zest",bText:"I stay calm and focused even when things get chaotic.",bStrength:"Self-Regulation"},
-      {id:41,aText:"I try to live honestly, even when it’s hard.",aStrength:"Honesty",bText:"I enjoy making others laugh with my sense of humor.",bStrength:"Humor"},
-      {id:42,aText:"I like to think carefully before making choices.",aStrength:"Judgment",bText:"I believe my life has a spiritual or deeper purpose.",bStrength:"Spirituality"},
-      {id:43,aText:"I’m quick to notice when someone needs encouragement.",aStrength:"Kindness",bText:"I try to keep a hopeful outlook, even in tough times.",bStrength:"Hope"},
-      {id:44,aText:"I dive into online rabbit holes just to satisfy my curiosity.",aStrength:"Love of Learning",bText:"I can tell when a friend needs space versus when they need company.",bStrength:"Social Intelligence"},
-      {id:45,aText:"I prefer to stay humble about my achievements.",aStrength:"Humility",bText:"I feel thankful when people support me, and I express it.",bStrength:"Gratitude"},
-      {id:46,aText:"I like to take action even when the outcome is uncertain.",aStrength:"Bravery",bText:"I try to stay calm and disciplined, even under pressure.",bStrength:"Self-Regulation"},
-      {id:47,aText:"I enjoy noticing and appreciating beauty in everyday things.",aStrength:"Appreciation of Beauty",bText:"I often encourage others with hopeful words.",bStrength:"Hope"},
-      {id:48,aText:"I feel most satisfied when I finish what I start.",aStrength:"Perseverance",bText:"I’m quick to admit when I’ve made a mistake.",bStrength:"Humility"},
-      {id:49,aText:"I like to brainstorm creative solutions when problems arise.",aStrength:"Creativity",bText:"I speak up when I see rules being applied unevenly.",bStrength:"Fairness"},
-      {id:50,aText:"I enjoy learning new things, even outside of school.",aStrength:"Love of Learning",bText:"I often sense when someone needs comfort or support.",bStrength:"Social Intelligence"},
-      {id:51,aText:"I let go of grudges so I can move forward.",aStrength:"Forgiveness",bText:"I feel connected to something larger when I spend time in nature.",bStrength:"Spirituality"},
-      {id:52,aText:"I like to keep the group organized and moving forward.",aStrength:"Leadership",bText:"I express affection through consistent, thoughtful gestures.",bStrength:"Love"},
-      {id:53,aText:"I enjoy asking questions just to satisfy my curiosity.",aStrength:"Curiosity",bText:"I’m comfortable telling the truth, even if it’s awkward.",bStrength:"Honesty"},
-      {id:54,aText:"I use playful banter to keep conversations upbeat.",aStrength:"Humor",bText:"I double‑check facts before I share them.",bStrength:"Judgment"},
-      {id:55,aText:"I feel energized when I’m physically active.",aStrength:"Zest",bText:"I happily put group priorities first so we can all succeed.",bStrength:"Teamwork"},
-      {id:56,aText:"I like to see situations from multiple perspectives.",aStrength:"Perspective",bText:"I’m quick to express gratitude when others help me.",bStrength:"Gratitude"},
-      {id:57,aText:"I admire excellence in people’s work or character.",aStrength:"Appreciation of Beauty",bText:"I build routines to keep myself from drifting off-task.",bStrength:"Self-Regulation"},
-      {id:58,aText:"I enjoy experimenting with new tools or apps just to see how they work.",aStrength:"Love of Learning",bText:"I adjust my approach depending on who I’m talking to.",bStrength:"Social Intelligence"},
-      {id:59,aText:"I like to take risks to stand up for what’s right.",aStrength:"Bravery",bText:"I feel thankful for the small things in life.",bStrength:"Gratitude"},
-      {id:60,aText:"I hold onto the belief that the future can turn out well.",aStrength:"Hope",bText:"I let my work speak for itself instead of highlighting my wins.",bStrength:"Humility"},
-      {id:61,aText:"I enjoy experimenting with new ways to solve problems.",aStrength:"Creativity",bText:"I honor my promises even when finishing them takes extra grit.",bStrength:"Perseverance"},
-      {id:62,aText:"I like to encourage others with positive energy.",aStrength:"Zest",bText:"I make sure the quiet voices in a team still get heard.",bStrength:"Teamwork"},
-      {id:63,aText:"I notice when someone is overwhelmed and pitch in without being asked.",aStrength:"Kindness",bText:"I like comparing different viewpoints before drawing conclusions.",bStrength:"Perspective"},
-      {id:64,aText:"I monitor situations to be sure everyone gets a fair shake.",aStrength:"Fairness",bText:"I feel a sense of meaning that goes beyond the everyday.",bStrength:"Spirituality"},
-      {id:65,aText:"I love sprinkling lighthearted moments into serious situations.",aStrength:"Humor",bText:"I stick to my principles even when there’s pressure to bend them.",bStrength:"Honesty"},
-      {id:66,aText:"I pause to consider evidence before making up my mind.",aStrength:"Judgment",bText:"I check in on people and handle little chores to lighten their load.",bStrength:"Kindness"},
-      {id:67,aText:"I rally people around a shared goal and keep momentum going.",aStrength:"Leadership",bText:"I prefer to resolve conflicts quickly so we can move forward together.",bStrength:"Forgiveness"},
-      {id:68,aText:"I love probing deeper with follow-up questions.",aStrength:"Curiosity",bText:"I keep refining my work until I’m genuinely satisfied with it.",bStrength:"Perseverance"},
-      {id:69,aText:"I’m drawn to craftsmanship and artistry wherever I spot it.",aStrength:"Appreciation of Beauty",bText:"I remind people of the bright side when challenges pile up.",bStrength:"Hope"},
-      {id:70,aText:"I thrive on tossing around offbeat ideas with collaborators.",aStrength:"Creativity",bText:"I steady my emotions so stress doesn’t spill over.",bStrength:"Self-Regulation"},
-      {id:71,aText:"I geek out over mastering new skills just to satisfy my curiosity.",aStrength:"Love of Learning",bText:"I’m quick to admit when someone else knows more than I do.",bStrength:"Humility"},
-      {id:72,aText:"I’m willing to blaze a trail even when no one else volunteers.",aStrength:"Bravery",bText:"I feel grateful when people support me, and I express it.",bStrength:"Gratitude"},
-      {id:73,aText:"I pause to soak in subtle patterns others walk right past.",aStrength:"Appreciation of Beauty",bText:"I feel fulfilled when I help someone grow into their best self.",bStrength:"Love"},
-      {id:74,aText:"I try to forgive people so we can work together again.",aStrength:"Forgiveness",bText:"I naturally divvy up tasks so our group stays on schedule.",bStrength:"Leadership"},
-      {id:75,aText:"I relish walking someone through a complex topic step by step.",aStrength:"Love of Learning",bText:"I often anticipate a friend’s reaction before they say a word.",bStrength:"Social Intelligence"},
-      {id:76,aText:"I like offering people a glimpse of what could go right ahead.",aStrength:"Hope",bText:"I own my decisions, even when they’re unpopular.",bStrength:"Honesty"},
-      {id:77,aText:"I crack a joke to release tension when a room feels stiff.",aStrength:"Humor",bText:"I carefully weigh risks and consequences before acting.",bStrength:"Prudence"},
-      {id:78,aText:"I feel happiest when I’m nurturing the bonds I care about.",aStrength:"Love",bText:"I set gentle guardrails so distractions don’t derail me.",bStrength:"Self-Regulation"},
-      {id:79,aText:"I like zooming out to see how current events fit a larger story.",aStrength:"Perspective",bText:"I reflect on how my actions align with my spiritual beliefs.",bStrength:"Spirituality"},
-      {id:80,aText:"I love tinkering with everyday routines to make them more inventive.",aStrength:"Creativity",bText:"I push through obstacles until my objective is reached.",bStrength:"Perseverance"},
-      {id:81,aText:"I chase random facts just because I’m fascinated by them.",aStrength:"Curiosity",bText:"I advocate so everyone gets an equal shot at opportunities.",bStrength:"Fairness"},
-      {id:82,aText:"I step in to coordinate when a team needs direction.",aStrength:"Leadership",bText:"I show up consistently for the people who matter most to me.",bStrength:"Love"},
-      {id:83,aText:"I consider long-term impacts before making recommendations.",aStrength:"Perspective",bText:"I’m able to let go when someone genuinely tries to make things right.",bStrength:"Forgiveness"},
-      {id:84,aText:"I feel alive when I can move, dance, or stay physically active.",aStrength:"Zest",bText:"I maintain focus even when the environment is hectic.",bStrength:"Self-Regulation"},
-      {id:85,aText:"I try to model integrity for the people around me.",aStrength:"Honesty",bText:"I use playful banter to keep conversations upbeat.",bStrength:"Humor"},
-      {id:86,aText:"I sift through details carefully before choosing a direction.",aStrength:"Judgment",bText:"I look for the larger significance behind life’s events.",bStrength:"Spirituality"},
-      {id:87,aText:"I notice who needs encouragement and make a point to check in.",aStrength:"Kindness",bText:"I help others imagine the positive outcomes we’re working toward.",bStrength:"Hope"},
-      {id:88,aText:"I summarize complex ideas in a way others can apply.",aStrength:"Love of Learning",bText:"I read body language to steer conversations smoothly.",bStrength:"Social Intelligence"},
-      {id:89,aText:"I share credit freely when a project succeeds.",aStrength:"Humility",bText:"I make sure to thank people for even the small assist they give me.",bStrength:"Gratitude"},
-      {id:90,aText:"I confront tough issues head-on instead of waiting them out.",aStrength:"Bravery",bText:"I steady myself under pressure so I can think clearly.",bStrength:"Self-Regulation"},
-      {id:91,aText:"I notice the artistry in everyday places and moments.",aStrength:"Appreciation of Beauty",bText:"I cheer others on by pointing out the progress we’ve made.",bStrength:"Hope"},
-      {id:92,aText:"I finish what I start, even when the excitement fades.",aStrength:"Perseverance",bText:"I admit missteps quickly so we can solve the problem.",bStrength:"Humility"},
-      {id:93,aText:"I love approaching stubborn problems with a fresh angle.",aStrength:"Creativity",bText:"I push for balanced outcomes when resources are divided.",bStrength:"Fairness"},
-      {id:94,aText:"I fill my free time exploring new subjects just because.",aStrength:"Love of Learning",bText:"I pick up on subtle cues when someone needs a listening ear.",bStrength:"Social Intelligence"},
-      {id:95,aText:"I’m ready to rebuild trust once someone shows genuine remorse.",aStrength:"Forgiveness",bText:"I’m guided by a purpose that feels bigger than day-to-day tasks.",bStrength:"Spirituality"},
-      {id:96,aText:"I organize people and resources to keep our plans moving.",aStrength:"Leadership",bText:"I invest time in making close relationships feel safe and valued.",bStrength:"Love"}
-    ];
 
-    // Model B allocations (2 points per item)
-    const WEIGHTS = {
-      strongA: { A: 2, B: 0 },
-      slightA: { A: 1.5, B: 0.5 },
-      equal: { A: 1, B: 1 },
-      slightB: { A: 0.5, B: 1.5 },
-      strongB: { A: 0, B: 2 }
-    };
+    <!-- Scripts -->
+  <!-- 1. Data definitions (strengths, blurbs, questions, weights) -->
+  <script src="data.js"></script>
+  <script src="questions.js"></script>
 
-    const APP_KEY = "scholars_compass_via_v3";
+  <!-- 2. Core logic: state, navigation, assessment flow, results rendering -->
+  <script src="functions1.js"></script>
 
-    // State
-    let STATE = null;
-    let timerHandle = null;
-    let timerRemaining = 20;
-    let timerStartMs = null;
-
-    // Elements
-    const elConsent = document.getElementById("screen-consent");
-    const elAssessment = document.getElementById("screen-assessment");
-    const elResults = document.getElementById("screen-results");
-    const elBtnStart = document.getElementById("btn-start");
-    const elBtnResume = document.getElementById("btn-resume");
-    const elBtnClear = document.getElementById("btn-clear");
-    const elConsentCheck = document.getElementById("consent-check");
-    const elProgressCount = document.getElementById("progress-count");
-    const elProgressBar = document.getElementById("progress-bar");
-    const elTimer = document.getElementById("timer");
-    const elQuestionTitle = document.getElementById("question-title");
-    const elChoiceAText = document.getElementById("choice-a-text");
-    const elChoiceBText = document.getElementById("choice-b-text");
-    const elChoiceAStrength = document.getElementById("choice-a-strength");
-    const elChoiceBStrength = document.getElementById("choice-b-strength");
-    const elResultsTableBody = document.getElementById("results-table-body");
-    const elBtnDownloadJSON = document.getElementById("btn-download-json");
-    const elBtnDownloadCSV = document.getElementById("btn-download-csv");
-    const elBtnRestart = document.getElementById("btn-restart");
-
-    function initialState() {
-      const scores = {}; STRENGTHS.forEach(s => scores[s] = 0);
-      return {
-        version: "v3",
-        index: 0,
-        scores,
-        responses: [],
-        timeouts: 0,
-        startedAt: new Date().toISOString(),
-        completedAt: null
-      };
-    }
-    function saveState() { localStorage.setItem(APP_KEY, JSON.stringify(STATE)); }
-    function loadState() { const raw = localStorage.getItem(APP_KEY); return raw ? JSON.parse(raw) : null; }
-    function clearState() { localStorage.removeItem(APP_KEY); }
-
-    function showAssessment() { elConsent.classList.add("hidden"); elResults.classList.add("hidden"); elAssessment.classList.remove("hidden"); }
-    function showResults() { elConsent.classList.add("hidden"); elAssessment.classList.add("hidden"); elResults.classList.remove("hidden"); }
-
-    function syncConsentButtons() {
-      const saved = loadState();
-      if (saved && !saved.completedAt && saved.index < QUESTIONS.length) {
-        elBtnResume.classList.remove("hidden");
-      } else {
-        elBtnResume.classList.add("hidden");
-      }
-    }
-    syncConsentButtons();
-
-    elConsentCheck.addEventListener("change", () => { elBtnStart.disabled = !elConsentCheck.checked; });
-    elBtnStart.addEventListener("click", () => {
-      STATE = initialState();
-      saveState();
-      showAssessment();
-      renderQuestion();
-      startTimer();
-    });
-    elBtnResume.addEventListener("click", () => {
-      STATE = loadState();
-      if (!STATE) { return; }
-      showAssessment();
-      renderQuestion();
-      startTimer();
-    });
-    elBtnClear.addEventListener("click", () => {
-      clearState();
-      syncConsentButtons();
-      alert("Saved data cleared.");
-    });
-
-    function renderQuestion() {
-      const idx = STATE.index;
-      if (idx >= QUESTIONS.length) { finalizeAndShowResults(); return; }
-      const q = QUESTIONS[idx];
-      elQuestionTitle.textContent = `Question ${idx + 1}`;
-      elChoiceAText.textContent = q.aText;
-      elChoiceBText.textContent = q.bText;
-      elChoiceAStrength.textContent = q.aStrength;
-      elChoiceBStrength.textContent = q.bStrength;
-      elChoiceAStrength.className = "tag is-info is-light strength-tag";
-      elChoiceBStrength.className = "tag is-success is-light strength-tag";
-
-      elProgressCount.textContent = `${idx + 1} / ${QUESTIONS.length}`;
-      elProgressBar.value = idx + 1; elProgressBar.max = QUESTIONS.length;
-      elProgressBar.textContent = Math.round(((idx + 1) / QUESTIONS.length) * 100) + "%";
-
-      // Reset radios
-      document.querySelectorAll('input[name="scale"]').forEach(r => { r.checked = false; r.disabled = false; });
-      // Attach one-time handler
-      document.querySelectorAll('input[name="scale"]').forEach(r => {
-        r.onchange = () => {
-          recordSelection(r.value);
-          advance();
-        };
-      });
-    }
-
-    function startTimer() {
-      stopTimer();
-      timerRemaining = 20;
-      timerStartMs = Date.now();
-      updateTimerUI();
-      timerHandle = setInterval(() => {
-        timerRemaining--;
-        updateTimerUI();
-        if (timerRemaining <= 0) {
-          stopTimer();
-          recordTimeout();
-          advance();
-        }
-      }, 1000);
-    }
-    function stopTimer() { if (timerHandle) { clearInterval(timerHandle); timerHandle = null; } }
-    function updateTimerUI() {
-      elTimer.textContent = `${timerRemaining}s`;
-      if (timerRemaining <= 5) {
-        elTimer.classList.add("timer-low");
-      } else {
-        elTimer.classList.remove("timer-low");
-      }
-    }
-
-    function recordSelection(val) {
-      const idx = STATE.index;
-      const q = QUESTIONS[idx];
-      const w = WEIGHTS[val];
-      const timeTakenMs = Date.now() - timerStartMs;
-
-      // Allocate points
-      STATE.scores[q.aStrength] = (STATE.scores[q.aStrength] || 0) + w.A;
-      STATE.scores[q.bStrength] = (STATE.scores[q.bStrength] || 0) + w.B;
-
-      STATE.responses.push({
-        id: q.id,
-        selection: val,
-        aStrength: q.aStrength,
-        bStrength: q.bStrength,
-        aPoints: w.A,
-        bPoints: w.B,
-        timeTakenMs,
-        timeout: false,
-        at: new Date().toISOString()
-      });
-      saveState();
-    }
-
-    function recordTimeout() {
-      const idx = STATE.index;
-      const q = QUESTIONS[idx];
-      STATE.timeouts++;
-      STATE.responses.push({
-        id: q.id,
-        selection: null,
-        aStrength: q.aStrength,
-        bStrength: q.bStrength,
-        aPoints: 0,
-        bPoints: 0,
-        timeTakenMs: 20000,
-        timeout: true,
-        at: new Date().toISOString()
-      });
-      saveState();
-    }
-
-    function advance() {
-      STATE.index++;
-      saveState();
-      if (STATE.index >= QUESTIONS.length) {
-        finalizeAndShowResults();
-      } else {
-        renderQuestion();
-        startTimer();
-      }
-    }
-
-    function finalizeAndShowResults() {
-      STATE.completedAt = new Date().toISOString();
-      saveState();
-      const ranking = Object.entries(STATE.scores).sort((a, b) => b[1] - a[1]);
-      renderResults(ranking);
-      showResults();
-    }
-
-    function renderResults(ranking) {
-      elResultsTableBody.innerHTML = "";
-      const MAX_PER_STRENGTH = 16; // 8 items × 2 points
-      ranking.forEach(([strength, score], i) => {
-        const pct = Math.round((score / MAX_PER_STRENGTH) * 100);
-        const tr = document.createElement("tr");
-        if (i < 5) tr.classList.add("rank-top");
-        tr.innerHTML = `
-          <td>${i + 1}</td>
-          <td>${strength}</td>
-          <td>${score.toFixed(2)}</td>
-          <td>${pct}%</td>
-        `;
-        elResultsTableBody.appendChild(tr);
-      });
-      const neutrals = STATE.responses.filter(r => r.selection === "equal").length;
-      document.getElementById("meta-note").textContent =
-        `Neutrals: ${neutrals} • Timeouts: ${STATE.timeouts} • Total items: ${QUESTIONS.length}`;
-    }
-
-    // Export helpers
-    function download(filename, content, mime = 'text/plain') {
-      const blob = new Blob([content], { type: mime });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = filename;
-      document.body.appendChild(a); a.click(); a.remove();
-      URL.revokeObjectURL(url);
-    }
-
-    elBtnDownloadJSON.addEventListener("click", () => {
-      const data = {
-        metadata: {
-          version: STATE.version,
-          startedAt: STATE.startedAt,
-          completedAt: STATE.completedAt,
-          totalQuestions: QUESTIONS.length,
-          timeouts: STATE.timeouts,
-          timeLimitSeconds: 20,
-          scoringModel: "Model B (2 points per item; Slight=1.5/0.5; Equal=1/1)"
-        },
-        scores: STATE.scores,
-        ranking: Object.entries(STATE.scores).sort((a, b) => b[1] - a[1]),
-        responses: STATE.responses
-      };
-      download("scholars_compass_results.json", JSON.stringify(data, null, 2), "application/json");
-    });
-
-    elBtnDownloadCSV.addEventListener("click", () => {
-      const header = ["id", "selection", "aStrength", "bStrength", "aPoints", "bPoints", "timeTakenMs", "timeout", "at"].join(",");
-      const rows = STATE.responses.map(r => [
-        r.id,
-        r.selection === null ? "" : r.selection,
-        `"${r.aStrength}"`,
-        `"${r.bStrength}"`,
-        r.aPoints.toFixed(2),
-        r.bPoints.toFixed(2),
-        r.timeTakenMs,
-        r.timeout,
-        `"${r.at}"`
-      ].join(","));
-      const csv = [header, ...rows].join("\n");
-      download("scholars_compass_responses.csv", csv, "text/csv");
-    });
-
-    elBtnRestart.addEventListener("click", () => {
-      clearState();
-      STATE = initialState();
-      saveState();
-      showAssessment();
-      renderQuestion();
-      startTimer();
-    });
-
-    // Init: show results if a completed session exists; else consent; else resume option
-    (function init() {
-      const saved = loadState();
-      if (saved && saved.completedAt) {
-        STATE = saved;
-        const ranking = Object.entries(STATE.scores).sort((a, b) => b[1] - a[1]);
-        renderResults(ranking);
-        showResults();
-      } else {
-        elConsent.classList.remove("hidden");
-        elAssessment.classList.add("hidden");
-        elResults.classList.add("hidden");
-        syncConsentButtons();
-      }
-    })();
-  </script>
+  <!-- 3. Utilities: exports, restart, toast notifications -->
+  <script src="functions2.js"></script>
 </body>
-
 </html>
