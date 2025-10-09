@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scholar’s Compass: VIA Strengths Assessment</title>
+  <!-- Bulma CSS CDN -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+  />
+  <!-- Icons (optional) -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css"
+  />
+  <link rel="stylesheet" href="styles.css" /> 
+</head>
+<body>
+  <section class="hero is-primary">
+    <div class="hero-body">
+      <div class="app-container">
+        <h1 class="title has-text-white">Scholar’s Compass: VIA Strengths Assessment</h1>
+        <p class="subtitle has-text-white">
+          96 quick choices. 20 seconds each. One instinctive selection per pair.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <main class="app-container">
+    <!-- Consent & Privacy Screen -->
+    <section id="screen-consent" class="card">
+      <div class="card-content">
+        <h2 class="title is-4">Consent and privacy</h2>
+        <div class="content">
+          <p>
+            Welcome! This activity has 96 paired choices. You’ll have 20 seconds per pair.
+            Your responses are saved only on your device (browser localStorage). No personal
+            data is collected or sent to a server. You can export your results as JSON or CSV.
+          </p>
+          <p>
+            By continuing, you agree to participate voluntarily and understand that this is an
+            original, open-source assessment aligned to VIA character strengths.
+          </p>
+        </div>
+
+        <div class="field">
+          <label class="checkbox">
+            <input id="consent-check" type="checkbox" />
+            I have read and agree to the consent and privacy information.
+          </label>
+        </div>
+
+        <div class="buttons">
+          <button id="btn-start" class="button is-primary" disabled>
+            <span class="icon"><i class="mdi mdi-play"></i></span>
+            <span>Start assessment</span>
+          </button>
+          <button id="btn-resume" class="button is-link is-light hidden">
+            <span class="icon"><i class="mdi mdi-progress-helper"></i></span>
+            <span>Resume saved session</span>
+          </button>
+          <button id="btn-clear" class="button is-danger is-light">
+            <span class="icon"><i class="mdi mdi-delete"></i></span>
+            <span>Clear saved data</span>
+          </button>
+        </div>
+
+        <div class="content is-size-7 has-text-grey">
+          <p>
+            Tip: You can leave and return later; your progress auto-saves. Use “Resume saved
+            session” to continue where you left off.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Assessment Screen -->
+    <section id="screen-assessment" class="card hidden">
+      <div class="card-content">
+        <div class="progress-info">
+          <div>
+            <span id="progress-count" class="tag is-info is-light">0 / 96</span>
+          </div>
+          <div>
+            <span id="timer" class="tag is-warning is-light timer-badge">20s</span>
+            <span id="aria-live-timer" aria-live="polite"></span>
+          </div>
+        </div>
+
+        <h2 id="question-title" class="title is-5">Question</h2>
+
+        <div class="box">
+          <button id="btn-choice-a" class="button is-primary is-light choice-btn">
+            <strong>A.</strong> <span id="choice-a-text"></span>
+            <div class="strength-pill" id="choice-a-strength"></div>
+          </button>
+        </div>
+
+        <div class="box">
+          <button id="btn-choice-b" class="button is-primary is-light choice-btn">
+            <strong>B.</strong> <span id="choice-b-text"></span>
+            <div class="strength-pill" id="choice-b-strength"></div>
+          </button>
+        </div>
+
+        <div class="content is-size-7 has-text-grey">
+          <p>No back button is provided to preserve instinctive responses.</p>
+        </div>
+      </div>
+
+      <div class="sticky-footer">
+        <progress id="progress-bar" class="progress is-small is-info" value="0" max="96">0%</progress>
+      </div>
+    </section>
+
+    <!-- Results Screen -->
+    <section id="screen-results" class="card hidden">
+      <div class="card-content">
+        <h2 class="title is-4">Your results</h2>
+        <p class="content">
+          Below is your rank order of the 24 VIA strengths. Your top five are highlighted.
+          You can download your full session as JSON and your responses as CSV.
+        </p>
+
+        <div class="table-container">
+          <table class="table is-fullwidth is-striped is-hoverable">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Strength</th>
+                <th>Score (0–8)</th>
+              </tr>
+            </thead>
+            <tbody id="results-table-body"></tbody>
+          </table>
+        </div>
+
+        <div class="buttons">
+          <button id="btn-download-json" class="button is-link">
+            <span class="icon"><i class="mdi mdi-code-json"></i></span>
+            <span>Download JSON</span>
+          </button>
+          <button id="btn-download-csv" class="button is-info">
+            <span class="icon"><i class="mdi mdi-file-delimited"></i></span>
+            <span>Download CSV (responses)</span>
+          </button>
+          <button id="btn-restart" class="button is-primary is-light">
+            <span class="icon"><i class="mdi mdi-refresh"></i></span>
+            <span>Restart</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-container">
+    <p class="has-text-grey is-size-7">
+      Scholar’s Compass • Local-only assessment • Open-source items inspired by VIA strengths • © You
+    </p>
+  </footer>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
