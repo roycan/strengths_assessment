@@ -1,0 +1,79 @@
+    :root {
+      --accent: #485fc7; /* Bulma primary */
+      --danger: #f14668;
+      --success: #48c78e;
+      --warning: #ffdd57;
+      --dark: #363636;
+    }
+    html, body {
+      background: #f9fafb;
+    }
+    .app-container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    .card {
+      border-radius: 12px;
+    }
+    .timer-badge {
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .choice-btn {
+      width: 100%;
+      text-align: left;
+      padding: 1rem 1rem;
+      border-radius: 10px;
+      font-size: 1.05rem;
+      line-height: 1.4;
+    }
+    .choice-btn strong {
+      color: var(--dark);
+    }
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+    .strength-pill {
+      /* Hidden during assessment so users only see the question text */
+      display: none;
+      background: #eef3ff;
+      color: var(--accent);
+      border: 1px solid #dee6ff;
+      padding: 0.25rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+    }
+    .strength-pill.is-visible {
+      display: inline-block;
+    }
+    .rank-top {
+      background: #eefaf5;
+    }
+    .sticky-footer {
+      position: sticky;
+      bottom: 0;
+      background: #fff;
+      padding: 0.75rem;
+      border-top: 1px solid #eee;
+    }
+    .hidden {
+      display: none !important;
+    }
+    /* Mobile-first sizing */
+    .hero.is-primary {
+      background: linear-gradient(135deg, #485fc7 0%, #4a90e2 100%);
+    }
+    /* Accessibility for countdown updates */
+    #aria-live-timer {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
