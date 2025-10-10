@@ -463,6 +463,11 @@ const STRENGTHS_CONTENT = {
   }
 };
 
+// Expose to global for non-module scripts
+if (typeof window !== 'undefined') {
+  window.STRENGTHS_CONTENT = STRENGTHS_CONTENT;
+}
+
 // Helper for display name → slug
 function strengthToSlug(name){
   return name.toLowerCase()

@@ -8,12 +8,17 @@
   };
 
   if(!id || !window.STRENGTHS_CONTENT){
+    console.warn('Strength page: missing id or STRENGTHS_CONTENT', { id, hasContent: !!window.STRENGTHS_CONTENT });
     showNotFound();
     return;
   }
 
   const data = STRENGTHS_CONTENT[id];
-  if(!data){ showNotFound(); return; }
+  if(!data){
+    console.warn('Strength page: slug not found in content', { id, available: Object.keys(STRENGTHS_CONTENT || {}) });
+    showNotFound();
+    return;
+  }
 
   // Populate
   document.title = `${data.displayName} – Strength Profile`;
