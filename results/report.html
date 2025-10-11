@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your VIA Strengths Report</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    /* Report-specific styles + print overrides */
+    .report-container { max-width: 860px; margin: 0 auto; padding: 1rem; }
+    .report-header { margin: 1rem 0 0.5rem; }
+    .badge { display:inline-block; padding:0.15rem 0.5rem; border-radius:999px; font-size:0.75rem; border:1px solid #ddd; background:#f8f8f8; }
+    .cat-Analytical { background:#e8f1ff; border-color:#bcd4ff; }
+    .cat-Interpersonal { background:#e7fff2; border-color:#bcebd3; }
+    .cat-Intrapersonal { background:#fff6e5; border-color:#ffe4b3; }
+    .cat-Emotional { background:#f7ecff; border-color:#e2c8ff; }
+    .section-title { margin-top:1.5rem; margin-bottom:0.75rem; }
+    .top5-item { border:1px solid #e6e6e6; border-radius:10px; padding:0.75rem; margin-bottom:0.75rem; background:#fff; }
+    .top5-head { display:flex; justify-content:space-between; align-items:center; gap:0.5rem; }
+    .top5-tagline { color:#666; margin-top:0.25rem; }
+    .columns { margin-top:0.5rem; }
+    .micro-actions { border:1px dashed #ddd; padding:0.75rem; border-radius:8px; background:#fff; }
+    table.report-table { width:100%; border-collapse:collapse; font-size:0.95rem; }
+    table.report-table th, table.report-table td { border:1px solid #e6e6e6; padding:0.5rem; }
+    table.report-table th { background:#fafafa; text-align:left; }
+
+    .note { font-size:0.85rem; color:#555; }
+    .privacy { font-size:0.85rem; color:#444; }
+    .print-actions { margin: 0.5rem 0 1rem; }
+
+    @media print {
+      .hero, .print-actions, .notification { display:none !important; }
+      body { background:#fff; }
+      .report-container { padding: 0; }
+      @page { margin: 12mm; }
+      h1, h2, h3 { page-break-after: avoid; }
+      .top5-item { page-break-inside: avoid; }
+      thead { display: table-header-group; }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero is-primary">
+    <div class="hero-body">
+      <div class="report-container">
+        <h1 class="title has-text-white">Your VIA Strengths Report</h1>
+        <p class="subtitle has-text-white">Analytical • Interpersonal • Intrapersonal • Emotional</p>
+      </div>
+    </div>
+  </section>
+
+  <main class="report-container content">
+    <div class="notification is-info is-light privacy">
+      Generated locally in your browser; nothing is uploaded. You can print or save as PDF.
+    </div>
+
+    <div class="print-actions">
+      <button class="button is-link" onclick="window.print()">Print / Save as PDF</button>
+      <a href="../index.html" class="button is-light">Back to app</a>
+    </div>
+
+    <section id="report-cover">
+      <h2 class="title is-4 section-title">Cover</h2>
+      <p class="note">Date: <span id="report-date"></span></p>
+      <p class="note" id="no-results" style="display:none;">No results found on this device. <a href="../index.html">Take the assessment</a> to generate your report.</p>
+    </section>
+
+    <section id="report-why">
+      <h2 class="title is-4 section-title">Why this matters</h2>
+      <p>Using your strengths intentionally is linked to better engagement, steadier progress, and well‑being. Effects vary by person and context.</p>
+      <p class="note">References: <a href="https://www.gallup.com/workplace/231605/employees-strengths-company-stronger.aspx" target="_blank" rel="noopener">Gallup overview</a>, <a href="https://www.gallup.com/workplace/236561/employees-strengths-outperform-don.aspx" target="_blank" rel="noopener">employees who use strengths</a>, <a href="https://www.gallup.com/cliftonstrengths/en/253790/science-of-cliftonstrengths.aspx" target="_blank" rel="noopener">science overview</a>.</p>
+      <p class="note">Lens disclaimer: These categories are helpful lenses, not hard rules. Strengths often overlap and show up differently by person, culture, and context.</p>
+    </section>
+
+    <section id="report-snapshot">
+      <h2 class="title is-4 section-title">Snapshot</h2>
+      <div id="balance" class="note"></div>
+    </section>
+
+    <section id="report-top5">
+      <h2 class="title is-4 section-title">Your Top Strengths</h2>
+      <div id="top5-list"></div>
+    </section>
+
+    <section id="report-full">
+      <h2 class="title is-4 section-title">Full Profile (All 24)</h2>
+      <div class="table-container">
+        <table class="report-table">
+          <thead>
+            <tr><th>Rank</th><th>Strength</th><th>Category</th><th>Score</th><th>% of Max</th><th>About</th></tr>
+          </thead>
+          <tbody id="full-table"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="report-actions">
+      <h2 class="title is-4 section-title">Action Plan</h2>
+      <p class="note"><strong>How to use micro‑actions:</strong> Start tiny. Pick one 10–20 minute action that uses a top strength in a new way. Put it on your calendar, do it, and jot a 2‑sentence reflection: what changed in mood, energy, or progress? Each week, keep what helped and swap what didn’t.</p>
+      <div id="micro-actions" class="micro-actions"></div>
+    </section>
+  </main>
+
+  <script src="../data.js"></script>
+  <script src="../content/strengths-content.js"></script>
+  <script src="../content/strengths-content.js"></script>
+  <script src="../js/report.js"></script>
+</body>
+</html>
