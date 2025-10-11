@@ -26,6 +26,17 @@
           </div>
         <p>Think of strengths as your personal sources of energy—the real you, in action. When you use them, you feel more alive and effective.</p>
 
+        <!-- Motivation block: reinforce action orientation -->
+        <div class="motivation mt-3" aria-live="polite">
+          <div class="motivation-title"><strong>Why put strengths to work</strong></div>
+          <ul class="motivation-list">
+            <li>Applied strengths correlate with better well‑being at work and school.</li>
+            <li>Using a top strength in new ways can boost progress on goals.</li>
+            <li>Start small; reflect weekly to see what sticks for you.</li>
+          </ul>
+          <button type="button" class="button is-small is-light motivation-learn">Learn more</button>
+        </div>
+
         <h2 class="title is-4 mt-5">The Golden Rule: Awareness is Good, Action is Better</h2>
         <p>Real benefits come from using your strengths intentionally, not just knowing them.</p>
 
@@ -55,5 +66,11 @@
   <script src="../../data.js"></script>
   <script src="../../content/strengths-content.js"></script>
   <script src="../../js/journey.js"></script>
+  <script src="../../js/motivation.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      if(window.enhanceMotivationBlocks){ window.enhanceMotivationBlocks(); }
+    });
+  </script>
 </body>
 </html>

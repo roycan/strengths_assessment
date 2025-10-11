@@ -33,6 +33,17 @@
           <button id="btn-resume" class="button is-link is-light hidden">Resume saved session</button>
           <button id="btn-clear" class="button is-danger is-light">Clear saved data</button>
         </div>
+        
+        <!-- Motivation block: concise, research-backed benefits -->
+        <div class="motivation" aria-live="polite">
+          <div class="motivation-title"><strong>Why this matters</strong></div>
+          <ul class="motivation-list">
+            <li>Using your strengths is linked to higher energy and engagement.</li>
+            <li>Small, intentional use builds confidence and momentum.</li>
+            <li>Effects vary by person—experiment and notice what works.</li>
+          </ul>
+          <button type="button" class="button is-small is-light motivation-learn">Learn more</button>
+        </div>
       </div>
     </section>
 
@@ -117,5 +128,14 @@
 
   <!-- 3. Utilities: exports, restart, toast notifications -->
   <script src="functions2.js"></script>
+  
+  <!-- 4. Motivation: reusable block + modal enhancer -->
+  <script src="js/motivation.js"></script>
+  <script>
+    // Initialize motivation blocks when DOM is ready
+    document.addEventListener('DOMContentLoaded', function(){
+      if(window.enhanceMotivationBlocks){ window.enhanceMotivationBlocks(); }
+    });
+  </script>
 </body>
 </html>

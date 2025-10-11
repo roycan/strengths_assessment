@@ -89,3 +89,62 @@ body { background:#f9fafb; }
   opacity: 1;
   bottom: 50px;
 }
+
+/* Motivation block */
+.motivation {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+  background: #fff;
+}
+.motivation-title {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+.motivation-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem 1rem;
+  margin: 0.25rem 0 0.5rem 0;
+  padding-left: 1rem;
+}
+@media(min-width: 600px){
+  .motivation-list { grid-template-columns: repeat(3, 1fr); padding-left: 1rem; }
+}
+.motivation .motivation-learn.button {
+  font-size: 0.85rem;
+}
+
+/* Motivation modal */
+.motivation-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+.motivation-backdrop.open { display: flex; }
+.motivation-modal {
+  background: #fff;
+  width: min(640px, 92vw);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+.motivation-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eee;
+}
+.motivation-modal-body { padding: 0.75rem 1rem 1rem; }
+.motivation-close {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+.is-hidden { display: none !important; }
