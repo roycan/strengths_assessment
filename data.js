@@ -49,6 +49,7 @@ const WEIGHTS = {
   strongA: {A:2, B:0},
   slightA: {A:1.5, B:0.5},
   equal:   {A:1, B:1},
+  neither: {A:0.5, B:0.5},
   slightB: {A:0.5, B:1.5},
   strongB: {A:0, B:2}
 };

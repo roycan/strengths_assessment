@@ -28,11 +28,13 @@ body { background:#f9fafb; }
   background:#fff;
 }
 .scale-options label.equal { flex:1 1 100%; }
+.scale-options label.neither { flex:1 1 100%; }
 .scale-options input[type="radio"] { margin-right:0.35rem; }
 @media(min-width:600px){
   .scale-options { flex-wrap:nowrap; }
   .scale-options label { flex:1 1 auto; }
   .scale-options label.equal { flex:1 1 auto; }
+  .scale-options label.neither { flex:1 1 auto; }
 }
 
 /* Results */

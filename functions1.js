@@ -237,4 +237,12 @@ function renderResults(){
     });
     elResultsCards.appendChild(card);
   });
+
+  // Update meta note: add Neither count alongside existing fields if present on page
+  const neutrals = STATE.responses.filter(r=>r.selection==="equal").length;
+  const neithers = STATE.responses.filter(r=>r.selection==="neither").length;
+  const meta = document.getElementById("meta-note");
+  if (meta) {
+    meta.textContent = `Neutrals: ${neutrals} • Neither: ${neithers} • Timeouts: ${STATE.timeouts} • Total items: ${QUESTIONS.length}`;
+  }
 }
