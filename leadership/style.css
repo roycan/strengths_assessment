@@ -1,0 +1,46 @@
+/* Custom styles for a better look and feel */
+body {
+    background-color: #f5f7fa;
+}
+
+.view-section {
+    display: none;
+    /* Hidden by default */
+}
+
+.view-section.is-active {
+    display: block;
+    /* Show active section */
+}
+
+.quiz-option {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.quiz-option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+}
+
+.result-bar-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.result-bar {
+    height: 25px;
+    background-color: #485fc7;
+    /* Bulma's primary color */
+    border-radius: 4px;
+    color: white;
+    padding: 0 10px;
+    line-height: 25px;
+    white-space: nowrap;
+    transition: width 0.5s ease-in-out;
+}
+
+.result-label {
+    width: 120px;
+    font-weight: bold;
+}

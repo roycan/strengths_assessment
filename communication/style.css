@@ -1,0 +1,54 @@
+       /* Custom styles for a collaborative and encouraging feel */
+        :root {
+            --accent-color: #276cda; /* A welcoming blue */
+        }
+        body {
+            background-color: #f9f9f9;
+        }
+        .view-section {
+            display: none; /* Hidden by default */
+        }
+        .view-section.is-active {
+            display: block; /* Show active section */
+        }
+        .quiz-option-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            border: 2px solid transparent;
+            height: 100%;
+        }
+        .quiz-option-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent-color);
+        }
+        .result-bar-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .result-bar {
+            height: 30px;
+            background-color: var(--accent-color);
+            border-radius: 4px;
+            color: white;
+            padding: 0 12px;
+            line-height: 30px;
+            white-space: nowrap;
+            font-weight: bold;
+            transition: width 0.6s ease-in-out;
+        }
+        .result-label {
+            width: 130px;
+            font-weight: bold;
+            color: #363636;
+        }
+        .hero.is-primary {
+            background-color: var(--accent-color);
+        }
+        .progress.is-primary::-webkit-progress-value {
+             background-color: var(--accent-color);
+        }
+        .progress.is-primary::-moz-progress-bar {
+            background-color: var(--accent-color);
+        }

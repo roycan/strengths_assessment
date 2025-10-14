@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Communication Style Assessment</title>
+    <!-- Bulma CSS Framework -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+    <!-- Main Container -->
+    <div class="container py-5">
+        <!-- Welcome View -->
+        <section id="welcome-view" class="section view-section">
+            <div class="box has-text-centered">
+                <span class="icon is-large has-text-info">
+                    <i class="fas fa-3x fa-comments"></i>
+                </span>
+                <h1 class="title mt-4">Discover Your Communication Style</h1>
+                <p class="subtitle">Understand your impact and learn to communicate more effectively.</p>
+                <p>This tool, based on the Toastmasters project, helps you identify your preferred communication style. You will be presented with 15 questions. For each, choose the statement that best describes you.</p>
+                <div class="buttons is-centered mt-5">
+                    <button id="start-quiz-btn" class="button is-primary is-large">
+                        <span class="icon"><i class="fas fa-play"></i></span>
+                        <span>Start the Assessment</span>
+                    </button>
+                    <button id="view-results-btn" class="button is-light is-large is-hidden">
+                         <span class="icon"><i class="fas fa-chart-pie"></i></span>
+                        <span>View Saved Results</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz View -->
+        <section id="quiz-view" class="section view-section">
+            <div class="box">
+                <h2 class="title is-4 has-text-centered">Communication Assessment</h2>
+                <progress id="quiz-progress" class="progress is-primary" value="0" max="15"></progress>
+                <div class="has-text-centered mb-5">
+                    <p class="is-size-5">Question <span id="question-number">1</span> of 15</p>
+                </div>
+                <div id="quiz-options-container" class="columns is-multiline is-variable is-2-tablet is-4-desktop">
+                    <!-- Quiz options will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Results View -->
+        <section id="results-view" class="section view-section">
+            <div class="box">
+                <h1 class="title has-text-centered">Your Communication Profile</h1>
+                <p class="subtitle has-text-centered">Your responses indicate your primary communication style and tendencies.</p>
+                
+                <div class="columns is-vcentered is-desktop">
+                     <!-- Primary Style Summary -->
+                    <div class="column is-one-third-desktop has-text-centered">
+                        <div class="card">
+                            <header class="card-header">
+                                <p class="card-header-title is-centered">Your Primary Style</p>
+                            </header>
+                            <div class="card-content">
+                                <h2 id="primary-style-name" class="title is-2 has-text-primary"></h2>
+                                <p id="primary-style-summary" class="is-size-5"></p>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Ranked Scores Chart -->
+                    <div class="column">
+                        <h3 class="title is-4">Your Style Scores</h3>
+                        <div id="results-chart"></div>
+                    </div>
+                </div>
+
+                <!-- Detailed Style Descriptions -->
+                <div class="mt-6">
+                     <h3 class="title is-4">Explore All Communication Styles</h3>
+                     <div id="styles-details-container" class="mt-4"></div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="buttons is-centered mt-6">
+                    <button id="download-results-btn" class="button is-link">
+                        <span class="icon"><i class="fas fa-download"></i></span>
+                        <span>Download Results (.json)</span>
+                    </button>
+                    <button id="retake-quiz-btn" class="button is-light">
+                        <span class="icon"><i class="fas fa-redo"></i></span>
+                        <span>Take the Assessment Again</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+     <script src="data.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leadership Style Assessment</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+    <div class="container">
+        <section id="welcome-view" class="section view-section">
+            <div class="box has-text-centered">
+                <span class="icon is-large has-text-info">
+                    <i class="fas fa-3x fa-user-tie"></i>
+                </span>
+                <h1 class="title mt-4">Discover Your Leadership Style</h1>
+                <p class="subtitle">An assessment to help you understand your impact and grow as a leader.</p>
+                <p>This tool is based on the Toastmasters "Understanding Your Leadership Style" project. You will be presented with 48 statements. Rate how well each statement describes you.</p>
+                <div class="buttons is-centered mt-5">
+                    <button id="start-quiz-btn" class="button is-primary is-large">
+                        <span class="icon"><i class="fas fa-play"></i></span>
+                        <span>Start the Assessment</span>
+                    </button>
+                    <button id="view-results-btn" class="button is-light is-large is-hidden">
+                         <span class="icon"><i class="fas fa-chart-bar"></i></span>
+                        <span>View Saved Results</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="quiz-view" class="section view-section">
+            <div class="box">
+                <h2 class="title is-4 has-text-centered">Leadership Assessment</h2>
+                <progress id="quiz-progress" class="progress is-primary" value="0" max="48"></progress>
+                <div class="has-text-centered mb-5">
+                    <p class="is-size-5">Question <span id="question-number">1</span> of 48</p>
+                </div>
+                <div class="has-text-centered">
+                    <p id="question-text" class="is-size-4 mb-5">This is where the question text will go.</p>
+                </div>
+                <div class="columns is-multiline is-mobile">
+                    <div class="column is-full-mobile is-half-tablet is-one-quarter-desktop">
+                        <button class="button is-fullwidth is-medium quiz-option" data-value="0">Not at all</button>
+                    </div>
+                    <div class="column is-full-mobile is-half-tablet is-one-quarter-desktop">
+                        <button class="button is-fullwidth is-medium quiz-option" data-value="1">Slightly</button>
+                    </div>
+                    <div class="column is-full-mobile is-half-tablet is-one-quarter-desktop">
+                        <button class="button is-fullwidth is-medium quiz-option" data-value="2">Moderately</button>
+                    </div>
+                     <div class="column is-full-mobile is-half-tablet is-one-quarter-desktop">
+                        <button class="button is-fullwidth is-medium quiz-option" data-value="3">Completely</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="results-view" class="section view-section">
+            <div class="box">
+                <h1 class="title has-text-centered">Your Leadership Profile</h1>
+                <p class="subtitle has-text-centered">Based on your responses, here is your leadership style profile.</p>
+
+                <div class="columns is-vcentered">
+                    <div class="column is-two-thirds">
+                        <h3 class="title is-4">Your Style Scores</h3>
+                        <div id="results-chart"></div>
+                    </div>
+                    <div class="column">
+                        <div class="card">
+                            <header class="card-header">
+                                <p class="card-header-title">Your Primary Style</p>
+                            </header>
+                            <div class="card-content">
+                                <h2 id="primary-style-name" class="title is-3 has-text-primary"></h2>
+                                <p id="primary-style-description"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6">
+                     <h3 class="title is-4">Explore All Leadership Styles</h3>
+                     <div id="styles-details-container" class="mt-4"></div>
+                </div>
+
+                <div class="buttons is-centered mt-6">
+                    <button id="download-results-btn" class="button is-link">
+                        <span class="icon"><i class="fas fa-download"></i></span>
+                        <span>Download Results (.json)</span>
+                    </button>
+                    <button id="retake-quiz-btn" class="button is-light">
+                        <span class="icon"><i class="fas fa-redo"></i></span>
+                        <span>Take the Assessment Again</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
