@@ -1,0 +1,83 @@
+/* Custom styles for a focused and encouraging feel */
+:root {
+    --accent-color: #209cee;
+    /* A bright, academic blue */
+}
+
+body {
+    background-color: #f7f9fb;
+}
+
+.view-section {
+    display: none;
+    /* Hidden by default */
+}
+
+.view-section.is-active {
+    display: block;
+    /* Show active section */
+}
+
+.quiz-question-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: #363636;
+}
+
+.quiz-option-card {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    border: 2px solid transparent;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.quiz-option-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-color: var(--accent-color);
+}
+
+.result-bar-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.result-bar {
+    height: 30px;
+    background-color: var(--accent-color);
+    border-radius: 4px;
+    color: white;
+    padding: 0 12px;
+    line-height: 30px;
+    white-space: nowrap;
+    font-weight: bold;
+    transition: width 0.6s ease-in-out;
+}
+
+.result-label {
+    width: 130px;
+    font-weight: bold;
+    color: #363636;
+}
+
+.button.is-primary {
+    background-color: var(--accent-color);
+}
+
+.progress.is-primary::-webkit-progress-value {
+    background-color: var(--accent-color);
+}
+
+.progress.is-primary::-moz-progress-bar {
+    background-color: var(--accent-color);
+}
+
+.study-strategies ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}

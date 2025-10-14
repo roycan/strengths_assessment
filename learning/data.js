@@ -1,0 +1,26 @@
+
+// =================================================================
+// DATA: VARK Model Questions and Style Information
+// =================================================================
+window.appData = {
+    questions: [
+        { q: "When learning a new practical skill, you prefer to:", o: { V: "Watch a demonstration or a video.", A: "Listen to someone explain the steps.", R: "Read the instructions in a manual.", K: "Jump in and try it out for yourself." } },
+        { q: "If you were giving someone directions to your house, you would most likely:", o: { V: "Draw a map for them.", A: "Tell them the directions out loud.", R: "Write down a list of step-by-step instructions.", K: "Take them there yourself or describe landmarks they will pass." } },
+        { q: "When you are trying to remember a phone number, you are most likely to:", o: { V: "Visualize the numbers in your head.", A: "Say the numbers out loud, perhaps in a rhythm.", R: "Write the numbers down.", K: "Pace or walk around while thinking about them." } },
+        { q: "When you are choosing a new product (like a phone or laptop), what influences you most?", o: { V: "The way it looks and is designed.", A: "A recommendation from a friend you trust.", R: "Reading detailed reviews and specifications.", K: "Trying it out in the store." } },
+        { q: "When you are studying for a test, you prefer to:", o: { V: "Use diagrams, charts, and mind maps.", A: "Participate in a study group discussion.", R: "Create and review detailed notes and summaries.", K: "Use flashcards you can physically handle or pace while studying." } },
+        { q: "When you are assembling flat-pack furniture, you:", o: { V: "Look at the diagrams very carefully.", A: "Prefer if someone could talk you through it.", R: "Read the written instructions step-by-step.", K: "Start putting the pieces together and figure it out as you go." } },
+        { q: "What kind of book do you prefer to read for fun?", o: { V: "A book with lots of pictures or graphic novels.", A: "An audiobook.", R: "A text-heavy novel or non-fiction book.", K: "A choose-your-own-adventure or interactive book." } },
+        { q: "When you are in a new city, how do you find your way around?", o: { V: "Use a map or a GPS app with a visual display.", A: "Ask someone for verbal directions.", R: "Read a guidebook or street signs.", K: "Just start walking and get a feel for the layout." } },
+        { q: "When learning a new software program, you would:", o: { V: "Watch video tutorials.", A: "Listen to a podcast or audio guide about it.", R: "Read the help manual or online documentation.", K: "Click on all the buttons to see what they do." } },
+        { q: "How do you best remember the spelling of a difficult word?", o: { V: "Picture the word in your mind.", A: "Sound it out loud.", R: "Write it down several times.", K: "Trace the letters with your finger." } },
+        { q: "When you attend a presentation, what do you remember most?", o: { V: "The slides, charts, and visuals.", A: "The speaker's tone of voice and what they said.", R: "The notes you took during the presentation.", K: "Any hands-on activities or demonstrations." } },
+        { q: "What is your preferred way to receive news and information?", o: { V: "Watching the news on TV or online videos.", A: "Listening to the radio or a news podcast.", R: "Reading newspapers or news websites.", K: "Discussing current events with others." } }
+    ],
+    stylesInfo: {
+        'Visual': { id: 'V', summary: "You learn best by seeing.", description: "You prefer using images, diagrams, colors, and maps to understand and communicate information.", strategies: ["Use mind maps and flowcharts to connect ideas.", "Color-code your notes to highlight key points.", "Watch educational videos and documentaries.", "Use flashcards with images and diagrams."] },
+        'Auditory': { id: 'A', summary: "You learn best by hearing.", description: "You absorb information best through listening. You can easily recall information that you've heard in lectures, discussions, or recordings.", strategies: ["Record lectures and listen to them again.", "Participate actively in study group discussions.", "Read your notes out loud to yourself.", "Use mnemonic devices like rhymes and songs."] },
+        'Read/Write': { id: 'R', summary: "You learn best with words.", description: "You learn best by interacting with text. You prefer to absorb information by reading and solidify your understanding by writing it down.", strategies: ["Take detailed, well-organized notes in class.", "Rewrite or summarize your notes after class.", "Create lists, outlines, and summaries of chapters.", "Read textbooks and supplementary materials thoroughly."] },
+        'Kinesthetic': { id: 'K', summary: "You learn best by doing.", description: "You need a hands-on, active approach to truly grasp a concept. You learn best by doing, experiencing, and moving.", strategies: ["Study in short blocks with frequent breaks to move around.", "Use real-world examples and case studies.", "Build models or conduct experiments.", "Use flashcards that you can physically sort and manipulate."] }
+    }
+};
