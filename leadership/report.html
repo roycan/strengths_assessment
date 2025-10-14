@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Leadership Style Report</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .report-container { max-width: 860px; margin: 0 auto; padding: 1rem; }
+    .section-title { margin-top:1.5rem; margin-bottom:0.75rem; }
+    .note { font-size:0.9rem; color:#555; }
+    .print-actions { margin: 0.5rem 0 1rem; }
+    .chart-row { display:flex; align-items:center; gap:0.5rem; margin-bottom:0.5rem; }
+    .chart-label { width: 180px; font-weight:600; }
+    .chart-bar { height: 26px; background:#485fc7; color:#fff; border-radius:4px; padding:0 10px; line-height:26px; white-space:nowrap; transition:width 0.5s; }
+    .cardish { border:1px solid #e6e6e6; border-radius:10px; padding:0.75rem; background:#fff; }
+    .message.is-info .message-header { background:#f0f4ff; color:#1c2a6b; }
+    @media print {
+      .hero, .print-actions, .notification { display:none !important; }
+      body { background:#fff; }
+      .report-container { padding: 0; }
+      @page { margin: 12mm; }
+      h1, h2, h3 { page-break-after: avoid; }
+      .cardish { page-break-inside: avoid; }
+      thead { display: table-header-group; }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero is-primary">
+    <div class="hero-body">
+      <div class="report-container">
+        <h1 class="title has-text-white">Your Leadership Style Report</h1>
+        <p class="subtitle has-text-white">Toastmasters-inspired leadership styles</p>
+      </div>
+    </div>
+  </section>
+
+  <main class="report-container content">
+    <div class="notification is-info is-light">
+      Generated locally in your browser; nothing is uploaded. You can print or save as PDF.
+    </div>
+
+    <div class="print-actions">
+      <button class="button is-link" onclick="window.print()">Print / Save as PDF</button>
+      <a href="index.html" class="button is-light">Back to app</a>
+    </div>
+
+    <section>
+      <h2 class="title is-4 section-title">Cover</h2>
+      <p class="note">Date: <span id="report-date"></span></p>
+      <p class="note" id="no-results" style="display:none;">No leadership results found on this device. <a href="index.html">Take the assessment</a> to generate your report.</p>
+    </section>
+
+    <section>
+      <h2 class="title is-4 section-title">Your Primary Style</h2>
+      <div id="primary" class="cardish">
+        <h3 id="primary-name" class="title is-4"></h3>
+        <p id="primary-desc" class=""></p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="title is-4 section-title">Style Scores</h2>
+      <div id="chart"></div>
+      <p class="note">Scores are the sum of your selected ratings mapped to each style.
+      The maximum shown is computed from the number of items per style times 3 (Completely).</p>
+    </section>
+
+    <section>
+      <h2 class="title is-4 section-title">All Styles</h2>
+      <div id="details"></div>
+    </section>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="report.js"></script>
+</body>
+</html>

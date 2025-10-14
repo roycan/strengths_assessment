@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const viewResultsBtn = document.getElementById('view-results-btn');
             const quizProgress = document.getElementById('quiz-progress');
             const questionNumber = document.getElementById('question-number');
+            const questionTotal = document.getElementById('question-total');
             const quizOptionsContainer = document.getElementById('quiz-options-container');
             const resultsChart = document.getElementById('results-chart');
             const primaryStyleName = document.getElementById('primary-style-name');
@@ -38,8 +39,15 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             const init = () => {
+                // Sync progress max and total count with data
+                if (quizProgress && window.appData && Array.isArray(appData.questions)) {
+                    quizProgress.max = appData.questions.length;
+                    if (questionTotal) questionTotal.textContent = String(appData.questions.length);
+                }
                 if (localStorage.getItem('communicationResults')) {
                     viewResultsBtn.classList.remove('is-hidden');
+                        const reportBtn = document.getElementById('view-report-btn');
+                        if (reportBtn) reportBtn.classList.remove('is-hidden');
                 }
                 setupEventListeners();
                 showView('welcome');
@@ -77,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             
             const selectAnswer = (choice) => {
-                userAnswers.push(choice);
+                userAnswers.push(String(choice || '').toUpperCase());
                 currentQuestionIndex++;
                 if (currentQuestionIndex < appData.questions.length) {
                     renderQuestion();
@@ -89,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const finishQuiz = () => {
                 const results = calculateResults();
                 localStorage.setItem('communicationResults', JSON.stringify(results));
+                if (quizProgress) quizProgress.value = appData.questions.length;
                 renderResults(results);
                 showView('results');
             };
@@ -114,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const renderResults = (resultsData) => {
                 resultsChart.innerHTML = '';
                 stylesDetailsContainer.innerHTML = '';
-                const maxScore = 15;
+                const maxScore = appData.questions.length;
 
                 // Render bar chart
                 resultsData.forEach(style => {
@@ -130,9 +139,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 
                 // Display primary style
-                const primaryStyle = resultsData[0];
-                primaryStyleName.textContent = primaryStyle.name;
-                primaryStyleSummary.textContent = primaryStyle.summary;
+                const topScore = resultsData.length ? Math.max(...resultsData.map(s => s.score)) : 0;
+                const topStyles = resultsData.filter(s => s.score === topScore);
+                if (topStyles.length === 1) {
+                    primaryStyleName.textContent = topStyles[0].name;
+                    primaryStyleSummary.textContent = topStyles[0].summary || '';
+                } else {
+                    const names = topStyles.map(s => s.name);
+                    const niceJoin = (arr) => {
+                        if (arr.length <= 1) return arr.join('');
+                        if (arr.length === 2) return `${arr[0]} and ${arr[1]}`;
+                        return `${arr.slice(0, -1).join(', ')}, and ${arr[arr.length - 1]}`;
+                    };
+                    primaryStyleName.textContent = niceJoin(names);
+                    primaryStyleSummary.textContent = `You show equally strong preferences for ${niceJoin(names)}. Try combining the approaches below.`;
+                }
                 
                 // Display all style details
                 Object.values(appData.stylesInfo).forEach(styleInfo => {
@@ -170,11 +191,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 startQuizBtn.addEventListener('click', startQuiz);
                 
                 viewResultsBtn.addEventListener('click', () => {
-                    const savedResults = JSON.parse(localStorage.getItem('communicationResults'));
-                    if (savedResults) {
-                        renderResults(savedResults);
-                        showView('results');
-                    }
+                    try {
+                        const raw = localStorage.getItem('communicationResults');
+                        const saved = raw ? JSON.parse(raw) : null;
+                        let normalized = null;
+                        if (Array.isArray(saved)) {
+                            normalized = saved;
+                        } else if (saved && typeof saved === 'object') {
+                            // Accept object like {A: n, B: n, C: n, D: n}
+                            const byId = ['A','B','C','D']
+                                .filter(k => typeof saved[k] === 'number')
+                                .map(id => {
+                                    const infoEntry = Object.entries(appData.stylesInfo).find(([,info]) => info.id === id);
+                                    if (!infoEntry) return null;
+                                    const [name, info] = infoEntry;
+                                    return { name, score: Number(saved[id] || 0), ...info };
+                                })
+                                .filter(Boolean)
+                                .sort((a,b) => b.score - a.score);
+                            normalized = byId.length ? byId : null;
+                        }
+                        if (normalized && normalized.length) {
+                            renderResults(normalized);
+                            showView('results');
+                        }
+                    } catch (_) { /* ignore */ }
                 });
 
                 retakeQuizBtn.addEventListener('click', () => {

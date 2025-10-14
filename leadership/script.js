@@ -17,8 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     const startQuizBtn = document.getElementById('start-quiz-btn');
     const viewResultsBtn = document.getElementById('view-results-btn');
+    const viewReportBtn = document.getElementById('view-report-btn');
     const quizProgress = document.getElementById('quiz-progress');
     const questionNumber = document.getElementById('question-number');
+    const questionTotal = document.getElementById('question-total');
     const questionText = document.getElementById('question-text');
     const quizOptions = document.querySelectorAll('.quiz-option');
     const resultsChart = document.getElementById('results-chart');
@@ -47,8 +49,14 @@ document.addEventListener('DOMContentLoaded', () => {
      * Initializes the application on page load.
      */
     const init = () => {
+        // Align progress bar and total count with the data length
+        if (quizProgress && window.appData && Array.isArray(appData.questions)) {
+            quizProgress.max = appData.questions.length;
+            if (questionTotal) questionTotal.textContent = String(appData.questions.length);
+        }
         if (localStorage.getItem('leadershipResults')) {
             viewResultsBtn.classList.remove('is-hidden');
+            if (viewReportBtn) viewReportBtn.classList.remove('is-hidden');
         }
         setupEventListeners();
         showView('welcome');
@@ -71,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const question = appData.questions[currentQuestionIndex];
         questionText.textContent = question.text;
         questionNumber.textContent = currentQuestionIndex + 1;
+        // Progress shows how many questions have been answered so far
         quizProgress.value = currentQuestionIndex;
     };
 
@@ -94,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const finishQuiz = () => {
         const results = calculateResults();
         localStorage.setItem('leadershipResults', JSON.stringify(results));
+        if (quizProgress) quizProgress.value = appData.questions.length;
         renderResults(results);
         showView('results');
     };
@@ -138,7 +148,9 @@ document.addEventListener('DOMContentLoaded', () => {
         resultsChart.innerHTML = '';
         stylesDetailsContainer.innerHTML = '';
 
-        const maxScore = 18; // Max score for any style (6 questions * max value 3)
+    // Compute max score dynamically from scoring map (questions per style * max per question 3)
+    const questionsPerStyle = Math.max(...Object.values(appData.scoringMap).map(arr => arr.length));
+    const maxScore = questionsPerStyle * 3;
 
         // Render the bar chart
         resultsData.forEach(style => {
@@ -154,10 +166,22 @@ document.addEventListener('DOMContentLoaded', () => {
             resultsChart.innerHTML += barHtml;
         });
 
-        // Display the primary style
-        const primaryStyle = resultsData[0];
-        primaryStyleName.textContent = primaryStyle.name;
-        primaryStyleDescription.textContent = primaryStyle.description;
+        // Display the primary style (handle ties)
+        const topScore = resultsData.length ? Math.max(...resultsData.map(s => s.score)) : 0;
+        const topStyles = resultsData.filter(s => s.score === topScore);
+        if (topStyles.length === 1) {
+            primaryStyleName.textContent = topStyles[0].name;
+            primaryStyleDescription.textContent = topStyles[0].description;
+        } else {
+            const names = topStyles.map(s => s.name);
+            const niceJoin = (arr) => {
+                if (arr.length <= 1) return arr.join('');
+                if (arr.length === 2) return `${arr[0]} and ${arr[1]}`;
+                return `${arr.slice(0, -1).join(', ')}, and ${arr[arr.length - 1]}`;
+            };
+            primaryStyleName.textContent = niceJoin(names);
+            primaryStyleDescription.textContent = `You show equally high scores in ${niceJoin(names)}. Consider blending the approaches described below.`;
+        }
 
         // Display all style details in an accordion-like fashion
         resultsData.forEach(style => {
@@ -201,11 +225,25 @@ document.addEventListener('DOMContentLoaded', () => {
         startQuizBtn.addEventListener('click', startQuiz);
 
         viewResultsBtn.addEventListener('click', () => {
-            const savedResults = JSON.parse(localStorage.getItem('leadershipResults'));
-            if (savedResults) {
-                renderResults(savedResults);
-                showView('results');
-            }
+            try {
+                const raw = localStorage.getItem('leadershipResults');
+                const saved = raw ? JSON.parse(raw) : null;
+                if (!saved) return;
+                // Accept both saved array of objects and score objects keyed by style name
+                let normalized = null;
+                if (Array.isArray(saved)) {
+                    normalized = saved;
+                } else if (typeof saved === 'object') {
+                    normalized = Object.keys(saved)
+                        .filter(k => appData.stylesInfo[k])
+                        .map(k => ({ name: k, score: Number(saved[k] || 0), ...appData.stylesInfo[k] }))
+                        .sort((a,b) => b.score - a.score);
+                }
+                if (normalized && normalized.length) {
+                    renderResults(normalized);
+                    showView('results');
+                }
+            } catch (_) { /* ignore */ }
         });
 
         quizOptions.forEach(button => {

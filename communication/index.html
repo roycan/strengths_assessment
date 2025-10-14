@@ -33,6 +33,10 @@
                          <span class="icon"><i class="fas fa-chart-pie"></i></span>
                         <span>View Saved Results</span>
                     </button>
+                    <a id="view-report-btn" href="report.html" class="button is-info is-large is-hidden">
+                        <span class="icon"><i class="fas fa-print"></i></span>
+                        <span>Printable Report</span>
+                    </a>
                 </div>
             </div>
         </section>
@@ -43,7 +47,7 @@
                 <h2 class="title is-4 has-text-centered">Communication Assessment</h2>
                 <progress id="quiz-progress" class="progress is-primary" value="0" max="15"></progress>
                 <div class="has-text-centered mb-5">
-                    <p class="is-size-5">Question <span id="question-number">1</span> of 15</p>
+                    <p class="is-size-5">Question <span id="question-number">1</span> of <span id="question-total">15</span></p>
                 </div>
                 <div id="quiz-options-container" class="columns is-multiline is-variable is-2-tablet is-4-desktop">
                     <!-- Quiz options will be dynamically inserted here -->
@@ -85,6 +89,10 @@
 
                 <!-- Action Buttons -->
                 <div class="buttons is-centered mt-6">
+                    <a href="report.html" class="button is-info">
+                        <span class="icon"><i class="fas fa-print"></i></span>
+                        <span>View Printable Report</span>
+                    </a>
                     <button id="download-results-btn" class="button is-link">
                         <span class="icon"><i class="fas fa-download"></i></span>
                         <span>Download Results (.json)</span>
