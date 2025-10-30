@@ -148,3 +148,60 @@ body { background:#f9fafb; }
   cursor: pointer;
 }
 .is-hidden { display: none !important; }
+
+/* Strength Profile Enhancements */
+.blindspot-card {
+  border-left: 4px solid #3273dc;
+  background: #f8f9fa;
+}
+.blindspot-card .title {
+  margin-bottom: 0.5rem;
+}
+.blindspot-card p {
+  line-height: 1.6;
+}
+.blindspot-card .has-background-info-light {
+  border-radius: 6px;
+  border-left: 3px solid #3273dc;
+}
+
+.complementary-card {
+  border-left: 4px solid #485fc7;
+  background: #fafbfc;
+}
+.complementary-card .title {
+  margin-bottom: 0.5rem;
+  color: #485fc7 !important;
+}
+.complementary-card p {
+  line-height: 1.6;
+}
+
+#strength-in-action-list {
+  line-height: 1.8;
+}
+#strength-in-action-list li {
+  margin-bottom: 0.5rem;
+}
+
+#real-world-example {
+  font-size: 1rem;
+  line-height: 1.7;
+  font-style: italic;
+  border-left: 4px solid #48c774;
+}
+
+/* Print styles */
+@media print {
+  .hero { background: #3273dc !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .blindspot-card, .complementary-card, .box { 
+    page-break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .has-background-info-light { 
+    -webkit-print-color-adjust: exact; 
+    print-color-adjust: exact; 
+  }
+  .card { box-shadow: none; border: 1px solid #ddd; }
+}
