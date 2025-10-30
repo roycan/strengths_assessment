@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Learning Style Report - VARK Assessment</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <style>
+        :root {
+            --accent-color: #209cee;
+            --text-dark: #363636;
+            --text-muted: #777;
+            --border-color: #e6e6e6;
+        }
+
+        body {
+            background-color: #f7f9fb;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .report-container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            background: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .privacy-note {
+            background: #f0f4ff;
+            border-left: 4px solid var(--accent-color);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+        }
+
+        .print-actions {
+            margin-bottom: 2rem;
+        }
+
+        .page-section {
+            margin-bottom: 3rem;
+            page-break-inside: avoid;
+        }
+
+        .page-section h2 {
+            color: var(--accent-color);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+
+        .page-section h3 {
+            color: var(--text-dark);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.35rem;
+            font-weight: 600;
+        }
+
+        .profile-card {
+            border: 2px solid var(--accent-color);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            background: #f8fbff;
+            margin-bottom: 2rem;
+        }
+
+        .profile-card h1 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-card .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+        }
+
+        .score-chart {
+            margin: 1.5rem 0;
+        }
+
+        .chart-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .chart-label {
+            width: 140px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .chart-bar {
+            height: 32px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 4px;
+            padding: 0 12px;
+            line-height: 32px;
+            font-weight: 600;
+            transition: width 0.5s ease;
+            min-width: 40px;
+        }
+
+        .strategy-box {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            background: #fafafa;
+        }
+
+        .strategy-box h4 {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .quick-wins {
+            background: #fff9e6;
+            border-left: 4px solid #ffc107;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .quick-wins ul {
+            margin-left: 1.25rem;
+            margin-top: 0.75rem;
+        }
+
+        .quick-wins li {
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .tool-card {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1rem;
+            background: white;
+        }
+
+        .tool-card .tool-name {
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .tool-card .tool-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .tracker-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .tracker-table th,
+        .tracker-table td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .tracker-table th {
+            background: #f5f5f5;
+            font-weight: 600;
+        }
+
+        .checkbox-space {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--text-dark);
+            border-radius: 3px;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+
+        .pitfall-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .pitfall-item strong {
+            color: #d32f2f;
+        }
+
+        .pitfall-item .solution {
+            color: #388e3c;
+            font-weight: 600;
+        }
+
+        .citation {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin: 0.5rem 0;
+        }
+
+        .reference-list {
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .multimodal-note {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        #no-results {
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        #no-results h2 {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .hero,
+            .privacy-note,
+            .print-actions,
+            .notification {
+                display: none !important;
+            }
+
+            .report-container {
+                max-width: 100%;
+                padding: 0;
+            }
+
+            .page-section {
+                page-break-inside: avoid;
+            }
+
+            .page-section h2 {
+                page-break-after: avoid;
+            }
+
+            .strategy-box,
+            .tool-card,
+            .pitfall-item {
+                page-break-inside: avoid;
+            }
+
+            @page {
+                margin: 15mm;
+            }
+
+            a[href]:after {
+                content: none !important;
+            }
+
+            .chart-bar {
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .tool-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-label {
+                width: 100px;
+                font-size: 0.9rem;
+            }
+
+            .profile-card h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <section class="hero">
+        <div class="report-container">
+            <h1 class="title has-text-white is-2">
+                <i class="fas fa-graduation-cap"></i> Your Learning Style Report
+            </h1>
+            <p class="subtitle has-text-white">A personalized guide based on the VARK learning model</p>
+        </div>
+    </section>
+
+    <main class="report-container">
+        <!-- Privacy Note -->
+        <div class="privacy-note">
+            <strong><i class="fas fa-lock"></i> Your Privacy:</strong> This report is generated locally in your browser. 
+            No data is uploaded to any server. You can print or save as PDF for your records.
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="print-actions buttons">
+            <button class="button is-primary" onclick="window.print()">
+                <span class="icon"><i class="fas fa-print"></i></span>
+                <span>Print / Save as PDF</span>
+            </button>
+            <a href="index.html" class="button is-light">
+                <span class="icon"><i class="fas fa-arrow-left"></i></span>
+                <span>Back to Assessment</span>
+            </a>
+        </div>
+
+        <!-- No Results Message -->
+        <div id="no-results" style="display: none;">
+            <h2><i class="fas fa-exclamation-circle"></i> No Results Found</h2>
+            <p>It looks like you haven't taken the learning style assessment yet.</p>
+            <a href="index.html" class="button is-primary mt-3">Take Assessment Now</a>
+        </div>
+
+        <!-- Report Content (populated by JavaScript) -->
+        <div id="report-content" style="display: none;">
+            
+            <!-- PAGE 1: Learning Profile Summary -->
+            <section class="page-section" id="page-profile">
+                <h2><i class="fas fa-user-circle"></i> Your Learning Profile</h2>
+                <p class="citation">Report generated on <span id="report-date"></span></p>
+                
+                <div class="profile-card">
+                    <h1 id="primary-style-display"></h1>
+                    <p class="subtitle" id="primary-summary"></p>
+                </div>
+
+                <h3>Your VARK Scores</h3>
+                <div class="score-chart" id="score-chart-container"></div>
+
+                <div id="multimodal-intro" style="display: none;">
+                    <div class="multimodal-note">
+                        <strong><i class="fas fa-lightbulb"></i> Multi-Modal Learner:</strong>
+                        <span id="multimodal-text"></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 2: Understanding Your Style(s) -->
+            <section class="page-section" id="page-understanding">
+                <h2><i class="fas fa-brain"></i> Understanding Your Learning Style</h2>
+                <div id="style-details-container"></div>
+            </section>
+
+            <!-- PAGE 3: Subject-Specific Strategies -->
+            <section class="page-section" id="page-strategies">
+                <h2><i class="fas fa-book-open"></i> Subject-Specific Study Strategies</h2>
+                <p>Here are tailored strategies for applying your learning style across different subjects:</p>
+                
+                <div id="subject-strategies-container"></div>
+
+                <div class="quick-wins">
+                    <h4><i class="fas fa-rocket"></i> Quick Wins: Start Here</h4>
+                    <p>Try these 5 micro-strategies this week:</p>
+                    <ul id="quick-wins-list"></ul>
+                </div>
+            </section>
+
+            <!-- PAGE 4: Adapting to Different Learning Environments -->
+            <section class="page-section" id="page-adapting">
+                <h2><i class="fas fa-chalkboard-teacher"></i> Adapting to Different Learning Environments</h2>
+                <p>Not every class will match your preferred style. Here's how to adapt:</p>
+                <div id="environment-strategies-container"></div>
+
+                <h3><i class="fas fa-exclamation-triangle"></i> Common Pitfalls & Solutions</h3>
+                <div id="pitfalls-container"></div>
+            </section>
+
+            <!-- PAGE 5: Tools & Resources -->
+            <section class="page-section" id="page-tools">
+                <h2><i class="fas fa-toolbox"></i> Recommended Tools & Resources</h2>
+                <p>Curated tools that match your learning style (most are free or have free versions):</p>
+                <div id="tools-container"></div>
+            </section>
+
+            <!-- PAGE 6: 2-Week Action Plan -->
+            <section class="page-section" id="page-action-plan">
+                <h2><i class="fas fa-calendar-check"></i> Your 2-Week Learning Experiment</h2>
+                
+                <p>Learning about your style is just the start. The real value comes from <strong>trying new strategies</strong> 
+                and <strong>reflecting on what works</strong>. Commit to a 2-week experiment:</p>
+
+                <h3>Before You Start</h3>
+                <p><strong>Current Self-Assessment:</strong></p>
+                <p>On a scale of 1-10, how effective are your current study methods? <span class="checkbox-space"></span> _____</p>
+                <p>What's your biggest studying challenge right now?</p>
+                <p style="border-bottom: 1px solid #ccc; margin-bottom: 0.5rem;"></p>
+                <p style="border-bottom: 1px solid #ccc; margin-bottom: 1rem;"></p>
+
+                <h3>Week 1: Choose & Try</h3>
+                <p><strong>Select 2-3 strategies from this report to try:</strong></p>
+                <ol style="margin-left: 1.5rem;">
+                    <li style="margin-bottom: 0.5rem;">
+                        <span class="checkbox-space"></span> Strategy: _________________________________
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">
+                        <span class="checkbox-space"></span> Strategy: _________________________________
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">
+                        <span class="checkbox-space"></span> Strategy: _________________________________
+                    </li>
+                </ol>
+
+                <h3>Daily Tracker</h3>
+                <table class="tracker-table">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Used Strategy?</th>
+                            <th>Notes (What worked? What didn't?)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Day 1</td><td><span class="checkbox-space"></span></td><td style="min-width: 250px;"></td></tr>
+                        <tr><td>Day 2</td><td><span class="checkbox-space"></span></td><td></td></tr>
+                        <tr><td>Day 3</td><td><span class="checkbox-space"></span></td><td></td></tr>
+                        <tr><td>Day 4</td><td><span class="checkbox-space"></span></td><td></td></tr>
+                        <tr><td>Day 5</td><td><span class="checkbox-space"></span></td><td></td></tr>
+                        <tr><td>Day 6</td><td><span class="checkbox-space"></span></td><td></td></tr>
+                        <tr><td>Day 7</td><td><span class="checkbox-space"></span></td><td></td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Week 2: Reflect & Refine</h3>
+                <p><strong>What did you notice?</strong></p>
+                <ul style="margin-left: 1.5rem;">
+                    <li>Which strategy felt most natural? <p style="border-bottom: 1px solid #ccc; width: 100%;"></p></li>
+                    <li>Which strategy was most effective? <p style="border-bottom: 1px solid #ccc; width: 100%;"></p></li>
+                    <li>Any surprises? <p style="border-bottom: 1px solid #ccc; width: 100%;"></p></li>
+                </ul>
+
+                <p style="margin-top: 1.5rem;"><strong>Adjusted Self-Assessment:</strong></p>
+                <p>After 2 weeks, rate your study effectiveness: <span class="checkbox-space"></span> _____/10</p>
+                <p>What will you keep doing? What will you try next?</p>
+                <p style="border-bottom: 1px solid #ccc; margin-bottom: 0.5rem;"></p>
+                <p style="border-bottom: 1px solid #ccc;"></p>
+            </section>
+
+            <!-- PAGE 7: Quick Reference for All Styles -->
+            <section class="page-section" id="page-quick-reference">
+                <h2><i class="fas fa-th"></i> Quick Reference: All VARK Styles</h2>
+                <p>Understanding all four styles helps you work better with classmates and adapt to any teaching method:</p>
+                <div id="all-styles-container"></div>
+            </section>
+
+            <!-- PAGE 8: Research Background -->
+            <section class="page-section" id="page-research">
+                <h2><i class="fas fa-flask"></i> About the VARK Model</h2>
+                
+                <h3>What is VARK?</h3>
+                <p>VARK stands for <strong>Visual, Auditory, Read/Write, and Kinesthetic</strong> learning preferences. 
+                The model was developed by Neil Fleming and Colleen Mills in 1992 as a practical framework to help students 
+                understand how they prefer to take in and process information.</p>
+
+                <h3>The Research Foundation</h3>
+                <p>The VARK model builds on earlier work in sensory modalities and learning styles. Fleming's key insight was 
+                that students could benefit from understanding their preferences and actively choosing study strategies that 
+                align with those preferences.</p>
+
+                <p class="citation">Fleming, N. D., & Mills, C. (1992). Not Another Inventory, Rather a Catalyst for Reflection. 
+                <em>To Improve the Academy, 11</em>, 137-155.</p>
+
+                <h3>Multi-Modal Learners</h3>
+                <p>Research shows that <strong>60-70% of students are multi-modal learners</strong>—they benefit from using 
+                strategies from multiple categories. If your scores were close, that's completely normal and often advantageous!</p>
+
+                <h3>Important Considerations</h3>
+                <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                    <li><strong>Preferences vs. Abilities:</strong> VARK measures preferences, not intelligence or fixed abilities. 
+                    You can learn in any modality—this just shows what feels most natural.</li>
+                    <li><strong>Context Matters:</strong> Your ideal learning approach may vary by subject or situation. 
+                    Math might need kinesthetic practice, while history might call for more reading.</li>
+                    <li><strong>Growth Mindset:</strong> Learning styles can evolve. Building skills in less-preferred modalities 
+                    makes you a more flexible, resilient learner.</li>
+                </ul>
+
+                <h3>Further Reading</h3>
+                <div class="reference-list">
+                    <p><strong>Official VARK Website:</strong> <a href="https://vark-learn.com/" target="_blank">vark-learn.com</a> 
+                    (includes free questionnaires and study guides)</p>
+                    
+                    <p><strong>Recommended Articles:</strong></p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li>Fleming, N. D. (2001). Teaching and Learning Styles: VARK Strategies. Christchurch, New Zealand.</li>
+                        <li>Leite, W. L., Svinicki, M., & Shi, Y. (2010). Attempted Validation of the Scores of the VARK. 
+                        <em>Educational and Psychological Measurement, 70</em>(2), 323-339.</li>
+                        <li>Prithishkumar, I. J., & Michael, S. A. (2014). Understanding your student: Using the VARK model. 
+                        <em>Journal of Postgraduate Medicine, 60</em>(2), 183-186.</li>
+                    </ul>
+
+                    <p style="margin-top: 1rem;"><strong>Note for Science High School Students:</strong> If you have access to 
+                    academic databases like ScienceDirect or JSTOR, search for "VARK learning styles" or "sensory modalities education" 
+                    for peer-reviewed research on this topic.</p>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: #f0f4ff; border-radius: 8px;">
+                    <p style="margin-bottom: 0;"><strong><i class="fas fa-comments"></i> Questions or Feedback?</strong> 
+                    If you're a teacher using this tool with students, or a student who'd like to share how these strategies 
+                    worked for you, we'd love to hear from you. Learning is an ongoing experiment!</p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="data.js"></script>
+    <script src="report.js"></script>
+</body>
+</html>

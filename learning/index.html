@@ -22,7 +22,7 @@
                 </span>
                 <h1 class="title mt-4">Discover Your Learning Style</h1>
                 <p class="subtitle">Learn how to study smarter, not harder, based on your natural preferences.</p>
-                <p>This assessment is based on the VARK model. You will be presented with 12 situations. For each, choose the option that best describes how you would react or learn.</p>
+                <p>This assessment is based on the VARK model. You will be presented with 15 situations. For each, choose the option that best describes how you would react or learn.</p>
                 <div class="buttons is-centered mt-5">
                     <button id="start-quiz-btn" class="button is-primary is-large">
                         <span class="icon"><i class="fas fa-play"></i></span>
@@ -40,9 +40,9 @@
         <section id="quiz-view" class="section view-section">
             <div class="box">
                 <h2 class="title is-4 has-text-centered">Learning Style Assessment</h2>
-                <progress id="quiz-progress" class="progress is-primary" value="0" max="12"></progress>
+                <progress id="quiz-progress" class="progress is-primary" value="0" max="15"></progress>
                 <div class="has-text-centered mb-4">
-                    <p class="is-size-5">Question <span id="question-number">1</span> of <span id="question-total">12</span></p>
+                    <p class="is-size-5">Question <span id="question-number">1</span> of <span id="question-total">15</span></p>
                 </div>
                 <div class="has-text-centered">
                     <p id="question-text" class="quiz-question-title"></p>
@@ -93,6 +93,10 @@
 
                 <!-- Action Buttons -->
                 <div class="buttons is-centered mt-6">
+                    <a href="report.html" id="view-report-btn" class="button is-primary is-medium">
+                        <span class="icon"><i class="fas fa-file-alt"></i></span>
+                        <span>View Full Report</span>
+                    </a>
                     <button id="download-results-btn" class="button is-link">
                         <span class="icon"><i class="fas fa-download"></i></span>
                         <span>Download Results (.json)</span>
